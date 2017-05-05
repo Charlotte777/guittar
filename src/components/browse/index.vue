@@ -26,7 +26,7 @@
           <div class="img"><img src="/static/images/lu.jpg"></div>
         </div>
       </div>
-      <div class="center">dsad</div>
+      <center :todo="album"></center>
       <div class="friend">
         <div class="banner">
           <h3>
@@ -35,26 +35,44 @@
         </div>
       </div>
     </div>
-      <player :todo="songInfo"></player>
+    <player :todo="songInfo"></player>
   </div>
 </template>
 
 <script>
-import Player from './player'
-
-export default{
-  data(){
-    return{
-      songInfo:{
-        title : '时差 (On Call)',
-        singer : 'Lu Han'
+  import Player from './player'
+  import Center from './center'
+  import Axios from 'axios'
+  export default {
+    data() {
+      return {
+        songInfo: {
+          title: '时差 (On Call)',
+          singer: 'Lu Han',
+          playerInfo: {
+            url: null
+          }
+        },
+        album: {
+          name : "Imagination",
+          artist : 'Lu Han',
+          introduction : "Catch me when i fallCatch me when i fallCatch me when i fallCatch me when i fall"
+        }
       }
+    },
+    beforeMount(){
+      let self = this;
+      Axios.get('/music/url?id=347230').then(
+        function(res){
+           self.songInfo.playerInfo.url = res.data.data[0].url;
+        }
+      )
+    },
+    components: {
+      Player,
+      Center
     }
-  },
-  components:{
-    Player
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -171,5 +189,9 @@ export default{
   .guittar .guittar-content .list-player .img {
     width: 200px;
   }
-  
+  @media screen and (max-width:1200px) {
+    .friend{
+      display:none
+    }
+  }
 </style>

@@ -45,7 +45,8 @@ module.exports = {
             '/top_playlist': 'http://localhost:3000/',
             '/new_albums': 'http://localhost:3000/',
             '/top_artists': 'http://localhost:3000/',
-            '/top_list': 'http://localhost:3000/'
+            '/top_list': 'http://localhost:3000/',
+            '/song': 'http://localhost:3000/'
         },
         // CSS Sourcemaps off by default because relative paths are "buggy"
         // with this option, according to the CSS-Loader README

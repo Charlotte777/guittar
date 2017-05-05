@@ -4,29 +4,25 @@
       <p>{{todo.title}}</p>
       <p class="singer">{{todo.singer}}</p>
     </div>
-    <div class="player">
-      <div class="controller">
-        <ul>
-          <li class="random"></li>
-          <li class="prev"></li>
-          <li class="play"></li>
-          <li class="next"></li>
-          <li class="loop"></li>
-        </ul>
-      </div>
-      <div class="time-line-box">
-        <div class="time start">0:00</div>
-        <div class="time-line"></div>
-        <div class="time end">4:26</div>
-      </div>
+    <player-list :todo="todo.playerInfo"></player-list>
+    <div class="player-option">
+      <ul class="option">
+        <li class="list"></li>
+        <li class="voice">
+          <div class="voice-line"></div>
+        </li>
+      </ul>
     </div>
-    <div class="player-option"></div>
   </div>
 </template>
 
 <script>
+  import playerList from './player-list'
   export default {
-    props: ["todo"]
+    props: ["todo"],
+    components: {
+      playerList
+    }
   }
 </script>
 
@@ -44,18 +40,14 @@
   .guittar-player .player-info {
     display: inline-block;
   }
-
-  .guittar-player .player {
-    display: inline-block;
-    flex-grow: 1;
-  }
   
   .player-option {
     display: inline-block;
   }
   
   .guittar-player .player-info {
-    font-size: 14px
+    font-size: 14px;
+    width: 190px;
   }
   
   .guittar-player .player-info p {
@@ -73,32 +65,50 @@
     color: #A0A0A0
   }
   
-  .guittar-player .player .controller li {
+  .player-option .option .list:before {
+    content: '\e63e';
+    font-family: IconFont;
+    font-size: 18px;
+  }
+  
+  .player-option .option .voice:before {
+    content: '\e626';
+    font-family: IconFont;
+    font-size: 18px;
+  }
+  
+  .player-option .option .voice .voice-line {
+    height: 3px;
+    width: 80px;
+    background: #a0a0a0;
     display: inline-block;
+    border-radius: 8px;
   }
   
-  .guittar-player .player .controller .random:before {
-    content: '\e67d';
-    font-family: IconFont;
+  .player-option .option ul {
+    margin: 20px 0
   }
   
-  .guittar-player .player .controller .prev:before {
-    content: '\e502';
-    font-family: IconFont;
+  .player-option .option li {
+    display: inline-block;
+    color: #a0a0a0;
+    transition: all 0.1s ease-in;
   }
   
-  .guittar-player .player .controller .play:before {
-    content: '\e76b';
-    font-family: IconFont;
+  .player-option .option .list {
+    padding: 0 20px
   }
   
-  .guittar-player .player .controller .next:before {
-    content: '\e67d';
-    font-family: IconFont;
+  .player-option .option li:hover {
+    color: #fff
   }
   
-  .guittar-player .player .controller .loop:before {
-    content: '\e61f';
-    font-family: IconFont;
+  .player-option .option {
+    margin: 30px 0
+  }
+  
+  .player-option .option .voice {
+    display: inline-flex;
+    align-items: center;
   }
 </style>

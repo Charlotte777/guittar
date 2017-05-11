@@ -17,12 +17,42 @@
         </div>
       </div>
     </div>
+    <div class="guittar-container">
+      <ul>
+        <li id="overview" class="overview active">
+          overview
+        </li>
+        <li id="charts" class="overview">
+          charts
+        </li>
+        <li id="genres-moods" class="overview">
+          genres & moods
+        </li>
+        <li id="new-releases" class="overview">
+          new releases
+        </li>
+        <li id="discover" class="overview">
+          discover
+        </li>
+        <li id="concerts" class="overview">
+          concerts
+        </li>
+      </ul>
+      <span></span>
+      <div>
+        <component is="overview"></component>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+  import Overview from './overview'
   export default {
-    props: ["todo"]
+    props: ["todo"],
+    components: {
+      Overview
+    }
   }
 </script>
 
@@ -31,12 +61,18 @@
   .center {
     overflow: hidden;
     min-width: 580px;
+    overflow: scroll; 
+    overflow-x:hidden;
   }
   
   .center .banner-container {
+    width: 100%;
     height: 30%;
     position: relative;
     z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .center .banner-container .banner {
@@ -67,6 +103,7 @@
     flex-direction: column;
     text-align: left;
     width: 350px;
+    padding: 5px 0;
   }
   
   .banner-container .album .album-text h5 {
@@ -79,7 +116,15 @@
     font-weight: 600;
   }
   
-  .banner-container .album .album-text input {
+  .banner-container .album .album-text span {
+    padding: 10px 0;
+  }
+  
+  .banner-container .album .album-text .support {
+    padding: 10px 0
+  }
+  
+  .banner-container .album .album-text .support input {
     border: 0;
     border-radius: 20px;
     color: #fff;
@@ -110,5 +155,38 @@
   .banner-container .album .album-text .support {
     align-self: flex-end;
     width: 100%;
+  }
+  
+  .center .guittar-container {
+    padding: 30px;
+    position: relative;
+  }
+  
+  .center .guittar-container ul li {
+    color: #a0a0a0;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    margin-right: 23px;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+    transition:color 0.3s;
+  }
+   .center .guittar-container ul li.active{
+     color: #ffffff;
+   }
+    .center .guittar-container ul li:hover {
+    color: #ffffff;
+    cursor:pointer;
+  }
+  
+  .center .guittar-container span {
+    background: #1DB954;
+    height: 2px;
+    width: 30px;
+    display: inline-block;
+    position:absolute;
+    left:3em;
   }
 </style>

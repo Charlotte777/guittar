@@ -27,13 +27,6 @@
         </div>
       </div>
       <center :todo="album"></center>
-      <div class="friend">
-        <div class="banner">
-          <h3>
-            See what your friend are playing
-          </h3>
-        </div>
-      </div>
     </div>
     <player :todo="songInfo"></player>
   </div>

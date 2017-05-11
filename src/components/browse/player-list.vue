@@ -1,34 +1,46 @@
 <template>
   <div class="player">
-    <div class="controller">
-      <ul>
-        <li class="random" @click="random()"></li>
-        <li class="prev" @click="prev()"></li>
-        <li :class="{pause:isPlaying,play:!isPlaying}" @click="play(isPlaying)"></li>
-        <li class="next" @click="next()"></li>
-        <li class="loop" @click="next()"></li>
-      </ul>
-    </div>
-    <div class="time-line-box">
-      <div class="time start">
-        <p>{{ nowTime }}</p>
+    <div style="flex-grow: 1;">
+      <div class="controller">
+        <ul>
+          <li class="random" @click="random()"></li>
+          <li class="prev" @click="prev()"></li>
+          <li :class="{pause:isPlaying,play:!isPlaying}" @click="play(isPlaying)"></li>
+          <li class="next" @click="next()"></li>
+          <li class="loop" @click="next()"></li>
+        </ul>
       </div>
-      <div ref="bar" class="progress-bar" @mousedown="transfer($event)">
-        <div class="now" ref="nowBar" :style="{width}">
+      <div class="time-line-box">
+        <div class="time start">
+          <p>{{ nowTime }}</p>
+        </div>
+        <div ref="progress" class="progress-bar" @mousedown="transfer">
+          <div class="now" :style="{width}"></div>
+        </div>
+        <div class="time end">
+          <p>{{ endTime }}</p>
         </div>
       </div>
-      <div class="time end">
-        <p>{{ endTime }}</p>
+      <div style="display: none">
+        <audio ref="player" :src="todo.url" @loadeddata="duration" @pause="stopPlaying" @playing="startPlaying" />
       </div>
     </div>
-    <div style="display: none">
-      <audio ref="player" :src="todo.url" @loadeddata="duration" @pause="stopPlaying" @playing="startPlaying"/>
+    <div class="player-option">
+      <ul class="option">
+        <li class="list"></li>
+        <li class="volume">
+          <span :class="{voice:voice,mute:!voice}" @click="mute()"></span>
+          <div class="voice-line" @mousedown="adjust" ref="volume">
+            <div class="line-now" :style="{ width:volumeWidth }"></div>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
-import Axios from 'axios'
+  import Axios from 'axios'
   export default {
     props: ["todo"],
     data() {
@@ -37,13 +49,37 @@ import Axios from 'axios'
         isPlaying: false,
         nowTime: '0:00',
         endTime: '0:00',
-        width : '0%',
-        progress : setInterval(function(){
+        width: '0%',
+        voice: true,
+        volumeWidth: '100%',
+        progress: setInterval(function() {
           self.changeProgress()
-        },1000) 
+        }, 1000),
+        mMove(ev) {
+          ev = ev || window.event;
+          let mousePos = self.mCoords(ev); // xֵ  mousePos.x;   yֵ  mousePos.y;
+          return mousePos;
+        },
+        mCoords(ev) {
+          if (ev.pageX || ev.pageY) {
+            return {
+              x: ev.pageX,
+              y: ev.pageY
+            };
+          }
+          return {
+            x: ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+            y: ev.clientY + document.body.scrollTop - document.body.clientTop
+          };
+        }
       }
     },
     methods: {
+      mute(voice) {
+        let self = this;
+        self.$refs.player.volume = 0;
+        self.voice = !self.voice;
+      },
       play(isPlaying) {
         let self = this;
         if (!isPlaying) {
@@ -63,40 +99,95 @@ import Axios from 'axios'
         self.endTime = endTime;
         self.stopPlaying();
       },
-      changeProgress(){
+      changeProgress() {
         let self = this;
-        let duration=self.$refs.player.duration;
+        let duration = self.$refs.player.duration;
         let currentTime = self.$refs.player.currentTime;
-        let a= currentTime/duration;
-        let result = a*100+'%';
+        let a = currentTime / duration;
+        let result = a * 100 + '%';
         self.width = result;
-        let m=parseInt(currentTime / 60);
-        let s=parseInt(currentTime % 60);
-        self.nowTime =  m+ ':' + (s<10 ? '0'+ s : s);
+        let m = parseInt(currentTime / 60);
+        let s = parseInt(currentTime % 60);
+        self.nowTime = m + ':' + (s < 10 ? '0' + s : s);
       },
-      startPlaying(){
-        let self=this;
-        self.progress = setInterval(function(){
+      startPlaying() {
+        let self = this;
+        self.progress = setInterval(function() {
           self.changeProgress()
-        },1000);
+        }, 1000);
       },
-      stopPlaying(){
-        let self=this;
+      stopPlaying() {
+        let self = this;
         clearInterval(self.progress);
       },
-      transfer(event){
-        let self=this;
-        let barLeft = self.$refs.bar.offsetLeft;
-        let transferLeft = self.$refs.style.left;
-        console.log(transferLeft)
+      transfer() {
+        let self = this;
+  
+        function draging() {
+          let barLeft = self.$refs.progress.offsetLeft;
+          let barWidth = self.$refs.progress.offsetWidth;
+          let duration = self.$refs.player.duration;
+          self.width = ((self.mMove().x - barLeft) / barWidth) * 100 + '%';
+          self.$refs.player.currentTime = duration * parseFloat(self.width) / 100;
+        }
+        draging();
+        self.$refs.progress.onmousemove = function() {
+          draging();
+        }
+        self.$refs.progress.onmouseup = function() {
+          this.onmousemove = function() {}
+        }
+      },
+      adjust() {
+        let self = this;
+  
+        function draging() {
+          let volumewidth = self.$refs.volume.offsetWidth;
+          let volumeleft = self.$refs.volume.offsetLeft;
+          self.volumeWidth = ((self.mMove().x - volumeleft) / volumewidth) * 100 + '%';
+          self.$refs.player.volume = parseFloat(self.volumeWidth) / 100;
+        }
+        draging();
+        self.$refs.volume.onmousemove = function() {
+          draging();
+        }
+        self.$refs.volume.onmouseup = function() {
+          this.onmousemove = function() {}
+        }
       }
     },
     mounted() {
       let self = this;
-      Axios.get('/song/detail?ids=347230').then(function(res){console.log(res)})
+      // Axios.get('/song/detail?ids=347230').then(function(res){console.log(res)})
+      function changeVolume(key) {
+        if (key) {
+          self.$refs.player.volume += 0.1;
+          if(self.$refs.player.volume > 0.9){
+            self.$refs.player.volume=1
+          }
+        } else {
+          self.$refs.player.volume -= 0.1;
+          if (self.$refs.player.volume < 0.1) {
+            self.$refs.player.volume = 0
+          }
+        }
+        self.volumeWidth = (self.$refs.player.volume) * 100 + "%";
+      };
       document.onkeydown = function(e) {
         if (e.keyCode == 32) {
           self.play(self.isPlaying);
+        } else if (e.ctrlKey) {
+          if (e.keyCode == 38) {
+            changeVolume(true);
+            if (self.$refs.player.volume == 1) {
+              self.voice = true;
+            }
+          } else if (e.keyCode == 40) {
+            changeVolume(false);
+            if (self.$refs.player.volume == 0) {
+              self.voice = false;
+            }
+          }
         }
       }
     }
@@ -106,7 +197,7 @@ import Axios from 'axios'
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .player {
-    display: inline-block;
+    display: inline-flex;
     flex-grow: 1;
     color: #A0A0A0
   }
@@ -177,11 +268,11 @@ import Axios from 'axios'
   }
   
   .time-line-box .progress-bar {
-    background-color: rgba(255, 255, 255, 0.5);
+    background: #404040;
     border-radius: 3px;
     cursor: pointer;
     display: inline-block;
-    height: 2px;
+    height: 3px;
     position: relative;
     vertical-align: 2px;
     width: 50%;
@@ -190,7 +281,7 @@ import Axios from 'axios'
   .time-line-box .progress-bar .now {
     background-color: #31c27c;
     display: inline-block;
-    height: 2px;
+    height: 3px;
     left: 0;
     max-width: 100%;
     position: absolute;
@@ -203,5 +294,85 @@ import Axios from 'axios'
     left: 100%;
     position: absolute;
     width: 2px;
+  }
+  
+  .player-option {
+    display: inline-block;
+  }
+  
+  .player-option .option .list:before {
+    content: '\e63e';
+    font-family: IconFont;
+    font-size: 18px;
+  }
+  
+  .player-option .option .volume .voice:before {
+    content: '\e63d';
+    font-family: IconFont;
+    font-size: 18px;
+  }
+  
+  .player-option .option .volume .mute:before {
+    content: '\e63b';
+    font-family: IconFont;
+    font-size: 18px;
+  }
+  
+  .player-option .option .volume .voice-line {
+    height: 3px;
+    width: 80px;
+    background: #404040;
+    display: inline-block;
+    border-radius: 8px;
+  }
+  
+  .player-option .option .volume .voice-line .line-now {
+    width: 50%;
+    height: 100%;
+    background: #A0A0A0;
+    position: relative;
+  }
+  
+  .player-option .option .volume .voice-line:hover .line-now {
+    background: #1DB954;
+  }
+  
+  .player-option .option .volume .voice-line .line-now:before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    right: -5px;
+    top: -5px;
+    background: #FFFFFF;
+    border-radius: 100%;
+    display: none;
+    position: absolute;
+  }
+  
+  .player-option .option .volume .voice-line:hover .line-now:before {
+    display: inline-block;
+  }
+  
+  .player-option .option ul {
+    margin: 20px 0
+  }
+  
+  .player-option .option li {
+    display: inline-block;
+    color: #a0a0a0;
+    transition: all 0.1s ease-in;
+  }
+  
+  .player-option .option .list {
+    padding: 0 20px
+  }
+  
+  .player-option .option {
+    margin: 30px 0
+  }
+  
+  .player-option .option .volume {
+    display: inline-flex;
+    align-items: center;
   }
 </style>

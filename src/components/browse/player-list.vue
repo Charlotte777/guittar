@@ -145,6 +145,10 @@
           let volumewidth = self.$refs.volume.offsetWidth;
           let volumeleft = self.$refs.volume.offsetLeft;
           self.volumeWidth = ((self.mMove().x - volumeleft) / volumewidth) * 100 + '%';
+          if((((self.mMove().x - volumeleft) / volumewidth) * 100 + '%') >= '100%'){
+            self.volumeWidth="100%"
+          }
+          console.log(self.volumeWidth)
           self.$refs.player.volume = parseFloat(self.volumeWidth) / 100;
         }
         draging();

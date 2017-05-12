@@ -1,6 +1,6 @@
 <template>
   <div class="overview">
-    <div class="overview-song">
+    <div class="overview-list">
       <div class="title">
         <span class="s">Power tunes for the day!</span>
         <div class="arrow">
@@ -8,10 +8,11 @@
           <span class="next" @click="next"></span>
         </div>
       </div>
-      <div class="song-content">
-        <overview-list v-for="i in songList" :todo="i" :key="i.name"></overview-list>
+      <div class="list-content">
+        <div class="roller" v-for="(p, index) in pagination" :class="{active:index == page - 1 , prev:index < page - 1 , next:index > page - 1}">
+          <overview-list v-for="i in p" :todo="i" :key="i.name"></overview-list>
+        </div>
       </div>
-        
     </div>
     <overview-song></overview-song>
   </div>
@@ -31,7 +32,7 @@
         }, {
           src: "/static/images/by.jpg",
           name: "光辉岁月",
-          desc: "Beyoud",
+          desc: "Beyond",
         }, {
           src: "/static/images/tw.jpg",
           name: "莫斯科的眼泪",
@@ -69,19 +70,19 @@
       }
     },
     computed: {
-      songList() {
+      pagination(){
         let self = this;
         let arr = [];
-        let page = self.page;
         let lists = self.songLists;
-        let start = 5 * page - 5;
-        let end = 5 * page - 1;
-        if (lists.length - 1 < end) {
-          end = lists.length - 1;
-        }
-        for (let i = start; i <= end; i++) {
-          arr.push(lists[i]);
-        }
+        let i;
+        lists.forEach(function(item,index){
+          let p = Math.floor(index/5);
+          if(i != p){
+            i = p;
+            arr[i] = [];
+          }
+          arr[i].push(item);
+        });
         return arr;
       }
     },
@@ -109,38 +110,70 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .overview .overview-song .title {
+  .overview .overview-list .title {
     border-bottom: 1px solid #282828;
     padding: 20px 0
   }
   
-  .overview .overview-song .title .s {
+  .overview .overview-list .title .s {
     font-weight: 800;
     font-size: 18px;
   }
   
-  .overview .overview-song .title .prev:before {
+  .overview .overview-list .title .prev:before {
     content: '\e501';
     font-family: IconFont;
     cursor: pointer;
     font-size: 20px;
   }
   
-  .overview .overview-song .title .next:before {
+  .overview .overview-list .title .next:before {
     content: '\e601';
     font-family: IconFont;
     cursor: pointer;
     font-size: 20px;
   }
   
-  .overview .overview-song .title .arrow {
+  .overview .overview-list .title .arrow {
     float: right
   }
   
-  .overview .song-content {
+  .overview .list-content {
+    width: 100%;
+  }
+
+  .overview .list-content:after{ 
+    font-size: 0; 
+    line-height: 0; 
+    display: block; 
+    visibility: hidden; 
+    clear: both; 
+    overflow: hidden; 
+    width: 0; 
+    height: 0; 
+    content: ''; 
+  }
+  
+  .overview .list-content .roller {
     display: inline-flex;
     justify-content: space-between;
     width: 100%;
+    margin-left: -100%;
     flex-wrap: wrap;
+    float: left;
+    position: relative;
+    transition: left .8s;
+  }
+  .overview .list-content .roller:first-child{
+    margin-left: 0;
+  }
+  .overview .list-content .roller.active {
+    left: 0;
+  }
+  .overview .list-content .roller.prev {
+    left: calc(-100% - 30px);
+  }
+  .overview .list-content .roller.next {
+    left: calc(100% + 30px);
   }
 </style>

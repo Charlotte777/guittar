@@ -7,6 +7,7 @@
       <div class="song" v-for="i in song">
         <div class="img">
           <span>{{ i.Number }}</span><img :src="i.img">
+          <span class="opacity"></span>
         </div>
         <div class="info">
           <p>{{ i.songName }}</p>
@@ -88,13 +89,22 @@
   .overview-song .new-song .song {
     display: inline-flex;
   }
-  
-  .overview-song .new-song .song span {
-    color: #A0A0A0;
-    font-size: 14px;
-    line-height: 34px;
+  .overview-song .new-song .opacity{
+        position: absolute;
+    left: 36px;
+    top: 8px;
+     opacity:0;
   }
   
+  .overview-song .new-song .opacity::before {
+    content: '\e61c';
+    font-family: IconFont;
+    font-size: 22px;  
+  }
+  .overview-song .new-song .song:hover .opacity{
+    opacity:1;
+    transition: all 0.3s
+  }
   .overview-song .new-song .song {
     border: 1px solid #1F2127;
     margin: 5px 0;
@@ -108,12 +118,14 @@
    }
   .overview-song .new-song .song .img {
     display: inline-flex;
-    width: 70px
+    width: 70px;
+    position:relative
   }
   
   .overview-song .new-song .song .img img {
     width: 40px;
-    margin-left: 8px
+    margin-left: 8px;
+    height:40px;
   }
   
   .overview-song .new-song .song .info {

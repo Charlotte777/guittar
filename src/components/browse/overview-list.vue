@@ -2,6 +2,11 @@
   <div class="song">
     <div class="song-images">
       <img :src="todo.src">
+        <ul class="opacity">
+          <li class="a"></li>
+          <li class="b"></li>
+          <li class="c"></li>
+        </ul>
     </div>
     <div class="song-info">
       <p class="name">{{ todo.name }}</p>
@@ -33,6 +38,21 @@
   .song .song-info .name {
     color: #ffffff;
     font-size: 15px;
+  }
+  .song .song-info .opacity .a:before{
+    content: '\e61c';
+    font-family: IconFont;
+    font-size: 22px; 
+  }
+  .song .song-info .opacity .b:before{
+    content: '\e67d';
+    font-family: IconFont;
+    font-size: 22px; 
+  }
+  .song .song-info .opacity .c:before{
+    content: '\e502';
+    font-family: IconFont;
+    font-size: 22px; 
   }
   .song .song-info .name:hover {
     text-decoration: underline;

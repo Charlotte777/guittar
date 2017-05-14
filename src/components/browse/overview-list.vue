@@ -2,11 +2,8 @@
   <div class="song">
     <div class="song-images">
       <img :src="todo.src">
-        <ul class="opacity">
-          <li class="a"></li>
-          <li class="b"></li>
-          <li class="c"></li>
-        </ul>
+      <span class="listened">985</span>
+      <span class="play"></span>
     </div>
     <div class="song-info">
       <p class="name">{{ todo.name }}</p>
@@ -31,28 +28,52 @@
   .song .song-images {
     overflow: hidden;
     width:100%;
+    position:relative;
   }
+  .song .song-images .listened{
+    background: rgba(0, 0, 0, 0.3) none repeat scroll 0 0;
+    font-size: 12px;
+    padding: 3px 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+   .song .song-images .listened:before{
+    content: '\f0033';
+    font-family: IconFont;
+    font-size: 14px;
+   }
+    .song .song-images .play{
+     -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-bottom: 1px solid #fff;
+    border-image: none;
+    border-left: 1px solid #fff;
+    border-radius: 50%;
+    border-top: 1px solid #fff;
+    bottom: 4px;
+    padding: 1px 5px;
+    position: absolute;
+    right: 3px;
+    opacity:0;
+    transition:all 0.3s
+    }
+    .song .song-images:hover .play{
+      opacity:1;
+    }
+   .song .song-images .play:before{
+    content: '\e61c';
+    font-family: IconFont;
+    font-size: 14px;
+   }
   .song .song-info{
     margin:10px 0
   }
   .song .song-info .name {
     color: #ffffff;
     font-size: 15px;
-  }
-  .song .song-info .opacity .a:before{
-    content: '\e61c';
-    font-family: IconFont;
-    font-size: 22px; 
-  }
-  .song .song-info .opacity .b:before{
-    content: '\e67d';
-    font-family: IconFont;
-    font-size: 22px; 
-  }
-  .song .song-info .opacity .c:before{
-    content: '\e502';
-    font-family: IconFont;
-    font-size: 22px; 
   }
   .song .song-info .name:hover {
     text-decoration: underline;

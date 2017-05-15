@@ -15,12 +15,14 @@
       </div>
     </div>
     <overview-song></overview-song>
+    <overview-video></overview-video>
   </div>
 </template>
 
 <script>
   import overviewList from './overview-list'
   import overviewSong from './overview-song'
+  import overviewVideo from './overview-video'
   export default {
     props: ["todo"],
     data() {
@@ -103,7 +105,8 @@
     },
     components: {
       overviewList,
-      overviewSong
+      overviewSong,
+      overviewVideo
     },
   }
 </script>

@@ -19,39 +19,56 @@
     </div>
     <div class="guittar-container">
       <ul>
-        <li id="overview" class="overview active">
-          overview
+        <li id="overview" class="active">
+          <span class="title">overview</span>
+          <span class="slider"></span>
         </li>
-        <li id="charts" class="overview">
-          charts
+        <li id="charts" @click="charts" :class="{active: this.id == browse}">
+          <span class="title">charts</span>
+          <span class="slider"></span>
         </li>
-        <li id="genres-moods" class="overview">
-          genres & moods
+        <li id="genres-moods">
+          <span class="title">genres & moods</span>
+          <span class="slider"></span>
         </li>
-        <li id="new-releases" class="overview">
-          new releases
+        <li id="new-releases">
+          <span class="title">new releases</span>
+          <span class="slider"></span>
         </li>
-        <li id="discover" class="overview">
-          discover
+        <li id="discover">
+          <span class="title">discover</span>
+          <span class="slider"></span>
         </li>
-        <li id="concerts" class="overview">
-          concerts
+        <li id="concerts">
+          <span class="title">concerts</span>
+          <span class="slider"></span>
         </li>
       </ul>
-      <span></span>
       <div>
-        <component is="overview"></component>
+        <component :is="browse"></component>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import Overview from './overview'
+  import overview from './overview'
+  import charts from './charts'
   export default {
     props: ["todo"],
+    data() {
+      return {
+        browse: 'overview'
+      }
+    },
+    methods: {
+      charts() {
+        let self = this;
+        self.browse = charts;
+      }
+    },
     components: {
-      Overview
+      overview
     }
   }
 </script>
@@ -61,10 +78,9 @@
   .center {
     overflow: hidden;
     min-width: 580px;
-    overflow: scroll; 
-    overflow-x:hidden;
+    overflow: scroll;
+    overflow-x: hidden;
   }
-  
   .center .banner-container {
     width: 100%;
     height: 30%;
@@ -74,7 +90,6 @@
     align-items: center;
     justify-content: center;
   }
-  
   .center .banner-container .banner {
     background: rgba(0, 0, 0, 0) url("/static/images/lu.jpg") no-repeat scroll center center / cover;
     filter: blur(2px);
@@ -83,7 +98,6 @@
     width: 100%;
     z-index: -1;
   }
-  
   .banner-container .album {
     align-items: stretch;
     display: flex;
@@ -91,13 +105,11 @@
     margin: 10px 0;
     text-align: center;
   }
-  
   .banner-container .album .album-images {
     width: 200px;
     display: inline-block;
     margin-right: 10px
   }
-  
   .banner-container .album .album-text {
     display: inline-flex;
     flex-direction: column;
@@ -105,25 +117,20 @@
     width: 350px;
     padding: 5px 0;
   }
-  
   .banner-container .album .album-text h5 {
     color: #a0a0a0;
     font-weight: normal;
   }
-  
   .banner-container .album .album-text h1 {
     color: #ffffff;
     font-weight: 600;
   }
-  
   .banner-container .album .album-text span {
     padding: 10px 0;
   }
-  
   .banner-container .album .album-text .support {
     padding: 10px 0
   }
-  
   .banner-container .album .album-text .support input {
     border: 0;
     border-radius: 20px;
@@ -135,58 +142,57 @@
     cursor: pointer;
     font-size: 12px
   }
-  
   .banner-container .album .album-text .play {
     background: #1DB954;
   }
-  
   .banner-container .album .album-text .share {
     background: #1A1717;
     border: 1px solid #fff;
   }
-  
   .banner-container .album .album-text .more {
     background: #1A1717;
     border: 1px solid #fff;
     padding: 5px 8px;
     border-radius: 100%;
   }
-  
   .banner-container .album .album-text .support {
     align-self: flex-end;
     width: 100%;
   }
-  
   .center .guittar-container {
     padding: 30px;
     position: relative;
   }
-  
   .center .guittar-container ul li {
     color: #a0a0a0;
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
     font-size: 12px;
     font-weight: normal;
     letter-spacing: 2px;
     margin-right: 23px;
-    padding-bottom: 5px;
     text-transform: uppercase;
-    transition:color 0.3s;
+    transition: color 0.3s;
   }
-   .center .guittar-container ul li.active{
-     color: #ffffff;
-   }
-    .center .guittar-container ul li:hover {
+  .center .guittar-container ul li.active {
     color: #ffffff;
-    cursor:pointer;
   }
-  
-  .center .guittar-container span {
+  .center .guittar-container ul li:hover {
+    color: #ffffff;
+    cursor: pointer;
+  }
+  .center .guittar-container ul li .title {
+    padding-bottom: 5px;
+  }
+  .center .guittar-container ul li .slider {
     background: #1DB954;
     height: 2px;
     width: 30px;
     display: inline-block;
-    position:absolute;
-    left:3em;
+    opacity: 0;
+  }
+  .center .guittar-container ul li.active .slider {
+    opacity: 1;
   }
 </style>

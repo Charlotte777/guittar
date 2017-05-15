@@ -85,7 +85,9 @@
     border-bottom: 1px solid #282828;
     padding: 10px 0;
   }
-  
+  .title{
+  font-size: 18px
+}
   .overview-song .new-song .song {
     display: inline-flex;
   }
@@ -131,7 +133,9 @@
   .overview-song .new-song .song .info {
     font-size: 14px;
   }
-  
+  .overview-song .new-song .song .info{
+    margin-left:8px;  
+  }
   .overview-song .new-song .song .info .artist {
     color: #A0A0A0;
     cursor:pointer;

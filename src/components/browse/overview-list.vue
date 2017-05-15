@@ -22,15 +22,14 @@
 <style scoped>
   .song {
     margin: 10px 0;
-    width:18%;
+    width: 18%;
   }
-  
   .song .song-images {
     overflow: hidden;
-    width:100%;
-    position:relative;
+    width: 100%;
+    position: relative;
   }
-  .song .song-images .listened{
+  .song .song-images .listened {
     background: rgba(0, 0, 0, 0.3) none repeat scroll 0 0;
     font-size: 12px;
     padding: 3px 10px;
@@ -38,13 +37,13 @@
     right: 0;
     top: 0;
   }
-   .song .song-images .listened:before{
+  .song .song-images .listened:before {
     content: '\f0033';
     font-family: IconFont;
     font-size: 14px;
-   }
-    .song .song-images .play{
-     -moz-border-bottom-colors: none;
+  }
+  .song .song-images .play {
+    -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
@@ -57,19 +56,19 @@
     padding: 1px 5px;
     position: absolute;
     right: 3px;
-    opacity:0;
-    transition:all 0.3s
-    }
-    .song .song-images:hover .play{
-      opacity:1;
-    }
-   .song .song-images .play:before{
+    opacity: 0;
+    transition: all 0.3s
+  }
+  .song .song-images:hover .play {
+    opacity: 1;
+  }
+  .song .song-images .play:before {
     content: '\e61c';
     font-family: IconFont;
     font-size: 14px;
-   }
-  .song .song-info{
-    margin:10px 0
+  }
+  .song .song-info {
+    margin: 10px 0
   }
   .song .song-info .name {
     color: #ffffff;

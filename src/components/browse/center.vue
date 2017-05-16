@@ -19,28 +19,8 @@
     </div>
     <div class="guittar-container">
       <ul>
-        <li id="overview" class="active">
-          <span class="title">overview</span>
-          <span class="slider"></span>
-        </li>
-        <li id="charts" @click="charts" :class="{active: this.id == browse}">
-          <span class="title">charts</span>
-          <span class="slider"></span>
-        </li>
-        <li id="genres-moods">
-          <span class="title">genres & moods</span>
-          <span class="slider"></span>
-        </li>
-        <li id="new-releases">
-          <span class="title">new releases</span>
-          <span class="slider"></span>
-        </li>
-        <li id="discover">
-          <span class="title">discover</span>
-          <span class="slider"></span>
-        </li>
-        <li id="concerts">
-          <span class="title">concerts</span>
+        <li v-for="i in list" :id="i.id" :class="{active: i.id == browse}" @click="jumpto(i.id)">
+          <span class="title">{{ i.title }}</span>
           <span class="slider"></span>
         </li>
       </ul>
@@ -58,17 +38,37 @@
     props: ["todo"],
     data() {
       return {
+        list: [{
+          id: 'overview',
+          title: 'OVERVIEW'
+        }, {
+          id: 'charts',
+          title: 'CHARTS'
+        }, {
+          id: 'genres-moods',
+          title: 'GENRES & MOODS'
+        }, {
+          id: 'new-releases',
+          title: 'NEW RELEASES'
+        }, {
+          id: 'discover',
+          title: 'DISCOVER'
+        }, {
+          id: 'concerts',
+          title: 'CONCERTS'
+        }],
         browse: 'overview'
       }
     },
     methods: {
-      charts() {
+      jumpto(id) {
         let self = this;
-        self.browse = charts;
+        self.browse = id;
       }
     },
     components: {
-      overview
+      overview,
+      charts
     }
   }
 </script>

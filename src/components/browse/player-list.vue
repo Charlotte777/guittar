@@ -14,7 +14,7 @@
         <div class="time start">
           <p>{{ nowTime }}</p>
         </div>
-        <div ref="progress" class="progress-bar" @mousedown="transfer">
+        <div ref="progress" class="progress-bar" @mousedown="transfer($event)">
           <div class="now" :style="{width}"></div>
         </div>
         <div class="time end">
@@ -30,7 +30,7 @@
         <li class="list"></li>
         <li class="volume">
           <span :class="{voice:voice,mute:!voice}" @click="mute()"></span>
-          <div class="voice-line" @mousedown="adjust" ref="volume">
+          <div class="voice-line" @mousedown="adjust($event)" ref="volume">
             <div class="line-now" :style="{ width:volumeWidth }"></div>
           </div>
         </li>
@@ -120,40 +120,39 @@
         let self = this;
         clearInterval(self.progress);
       },
-      transfer() {
+      transfer(event) {
         let self = this;
   
-        function draging() {
+        function draging(ev) {
           let barLeft = self.$refs.progress.offsetLeft;
           let barWidth = self.$refs.progress.offsetWidth;
           let duration = self.$refs.player.duration;
-          self.width = ((self.mMove().x - barLeft) / barWidth) * 100 + '%';
+          self.width = ((self.mMove(ev).x - barLeft) / barWidth) * 100 + '%';
           self.$refs.player.currentTime = duration * parseFloat(self.width) / 100;
         }
-        draging();
-        self.$refs.progress.onmousemove = function() {
-          draging();
+        draging(event);
+        self.$refs.progress.onmousemove = function(ev) {
+          draging(ev);
         }
         self.$refs.progress.onmouseup = function() {
           this.onmousemove = function() {}
         }
       },
-      adjust() {
+      adjust(event) {
         let self = this;
   
-        function draging() {
+        function draging(ev) {
           let volumewidth = self.$refs.volume.offsetWidth;
           let volumeleft = self.$refs.volume.offsetLeft;
-          self.volumeWidth = ((self.mMove().x - volumeleft) / volumewidth) * 100 + '%';
-          if(((parseInt(self.mMove().x - volumeleft) / volumewidth)) >=1){
+          self.volumeWidth = ((self.mMove(ev).x - volumeleft) / volumewidth) * 100 + '%';
+          if(((parseInt(self.mMove(ev).x - volumeleft) / volumewidth)) >=1){
             self.volumeWidth="100%";
           }
-          console.log(parseInt(self.mMove().x - volumeleft) / volumewidth)
           self.$refs.player.volume = parseFloat(self.volumeWidth) / 100;
         }
-        draging();
-        self.$refs.volume.onmousemove = function() {
-          draging();
+        draging(event);
+        self.$refs.volume.onmousemove = function(ev) {
+          draging(ev);
         }
         self.$refs.volume.onmouseup = function() {
           this.onmousemove = function() {}

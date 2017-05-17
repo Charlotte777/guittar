@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="chasts">
     <div class="title">
       <span class="s">Featured Charts</span>
@@ -16,7 +16,7 @@
     data() {
       return {
         list: [{
-          title: "美国Billboard周榜",
+          title: "美国Billboard周榜周榜",
           img: "/static/images/charts/USA.png",
         }, {
           title: "Beatport全球电子舞曲榜",

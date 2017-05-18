@@ -1,5 +1,6 @@
 <template>
     <div class="browse">
+        <div class="seach">dasd</div>
         <div class="banner-container">
             <div class="banner"></div>
             <div class="album">

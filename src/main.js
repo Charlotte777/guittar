@@ -3,9 +3,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import App from './App'
-import router from './router'
+import Router from './router'
 
 Vue.use(Vuex);
+Vue.use(Router);
 Vue.config.productionTip = false
 
 const store = new Vuex.Store({
@@ -23,7 +24,7 @@ const store = new Vuex.Store({
 new Vue({
     el: '#app',
     store,
-    router,
+    router: Router,
     template: '<App/>',
     components: { App }
 })

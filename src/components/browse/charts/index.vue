@@ -3,24 +3,16 @@
     <div class="title">
       <span class="s">Featured Charts</span>
     </div>
-    <div class="list">
-      <div class="playlist" v-for="i in list">
-        <div class="s">
-          <img :src="i.img">
-          <ul class="opacity">
-            <li class="add"></li>
-            <li class="play"></li>
-            <li class="list"></li>
-          </ul>
-        </div>
-        <h5>{{ i.title }}</h5>
-      </div>
-    </div>
+    <div class="list"><guittar-list v-for="i in list" :todo="i" :key="i.title"></guittar-list></div>
   </div>
 </template>
 
 <script>
+  import guittarList from '../../general/guittar-list'
   export default {
+    components: {
+      guittarList
+    },
     data() {
       return {
         list: [{
@@ -93,72 +85,4 @@
     padding: 10px 0;
     border-bottom: 1px solid #1B1D22;
   }
-  .chasts .playlist {
-    display: inline-block;
-    margin: 10px 0;
-    margin-right: 2.5%;
-    width: 18%;
-  }
-  .chasts .playlist:nth-child(5n+0){
-    margin-right: 0;
-  }
-  .chasts .playlist img {
-    max-width: 100%
-  }
-  .chasts .playlist h5 {
-    font-size: 14px;
-    margin-top: 5px;
-    text-align: center
-  }
-  .chasts .playlist .opacity {
-    -moz-box-align: center;
-    -moz-box-pack: justify;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.8) none repeat scroll 0 0;
-    display: flex;
-    height: 100%;
-    justify-content: space-between;
-    padding: 0 30px;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    opacity: 0;
-    transition: all 0.3s
-  }
-  .chasts .playlist .opacity:hover {
-    opacity: 1
-  }
-  .chasts .playlist .add:before {
-    content: '\e603';
-  }
-  .chasts .playlist .play:before {
-    content: '\e61c';
-    font-size: 50px
-  }
-  .chasts .playlist .list:before {
-    content: '\e63e';
-  }
-  .chasts .playlist .s {
-    position: relative;
-  }
-  .chasts .playlist .s .opacity li {
-    display: inline-block;
-    font-family: IconFont;
-    font-size: 38px;
-    cursor: pointer
-  }
-   @media screen and (max-width:1200px) {
-     .chasts .playlist .play:before {
-       font-size: 32px
-     }
-      .chasts .playlist .s .opacity li {
-    font-size:20px;}
-   }
-    @media screen and (max-width:1500px) {
-     .chasts .playlist .play:before {
-       font-size: 38px
-     }
-      .chasts .playlist .s .opacity li {
-    font-size:26px;}
-   }
 </style>

@@ -27,6 +27,8 @@
     border-top: 1px solid #181818;
     padding: 8px 15px;
     display: flex;
+    z-index:999;
+    position:relative;
   }
   
   .guittar-player .player-info {

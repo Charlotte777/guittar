@@ -122,7 +122,6 @@
       },
       transfer(event) {
         let self = this;
-  
         function draging(ev) {
           let barLeft = self.$refs.progress.offsetLeft;
           let barWidth = self.$refs.progress.offsetWidth;
@@ -140,13 +139,12 @@
       },
       adjust(event) {
         let self = this;
-  
         function draging(ev) {
           let volumewidth = self.$refs.volume.offsetWidth;
           let volumeleft = self.$refs.volume.offsetLeft;
           self.volumeWidth = ((self.mMove(ev).x - volumeleft) / volumewidth) * 100 + '%';
-          if(((parseInt(self.mMove(ev).x - volumeleft) / volumewidth)) >=1){
-            self.volumeWidth="100%";
+          if (((parseInt(self.mMove(ev).x - volumeleft) / volumewidth)) >= 1) {
+            self.volumeWidth = "100%";
           }
           self.$refs.player.volume = parseFloat(self.volumeWidth) / 100;
         }
@@ -165,8 +163,8 @@
       function changeVolume(key) {
         if (key) {
           self.$refs.player.volume += 0.1;
-          if(self.$refs.player.volume > 0.9){
-            self.$refs.player.volume=1
+          if (self.$refs.player.volume > 0.9) {
+            self.$refs.player.volume = 1
           }
         } else {
           self.$refs.player.volume -= 0.1;
@@ -204,13 +202,11 @@
     flex-grow: 1;
     color: #A0A0A0
   }
-  
   .player .controller ul {
     text-align: center;
     font-size: 20px;
     border-radius: 8px;
   }
-  
   .player .controller li {
     display: inline-block;
     padding: 0 30px;
@@ -219,57 +215,46 @@
     height: 35px;
     width: 30px;
   }
-  
   .player .controller li:hover {
     color: #fff
   }
-  
   .player .controller .random:before {
     content: '\e67d';
     font-family: IconFont;
   }
-  
   .player .controller .prev:before {
     content: '\e502';
     font-family: IconFont;
   }
-  
   .player .controller .pause:before {
     content: '\e61d';
     font-family: IconFont;
     font-size: 30px;
   }
-  
   .player .controller .play:before {
     content: '\e61c';
     font-family: IconFont;
     font-size: 30px;
   }
-  
   .player .controller .next:before {
     content: '\e67d';
     font-family: IconFont;
   }
-  
   .player .controller .loop:before {
     content: '\e61f';
     font-family: IconFont;
   }
-  
   .time-line-box {
     margin-top: -5px;
     text-align: center;
   }
-  
   .time-line-box div {
     display: inline-block
   }
-  
   .time-line-box .start,
   .time-line-box .end {
     font-size: 12px;
   }
-  
   .time-line-box .progress-bar {
     background: #404040;
     border-radius: 3px;
@@ -280,7 +265,6 @@
     vertical-align: 2px;
     width: 50%;
   }
-  
   .time-line-box .progress-bar .now {
     background-color: #31c27c;
     display: inline-block;
@@ -289,7 +273,6 @@
     max-width: 100%;
     position: absolute;
   }
-  
   .time-line-box .progress-bar .now:after {
     background-color: white;
     content: "";
@@ -298,29 +281,32 @@
     position: absolute;
     width: 2px;
   }
-  
   .player-option {
     display: inline-block;
   }
-  
   .player-option .option .list:before {
     content: '\e63e';
     font-family: IconFont;
     font-size: 18px;
   }
-  
+  .player-option .option .volume .voice,
+  .player-option .option .volume .mute {
+    width: 18px;
+    height: 20px;
+  }
   .player-option .option .volume .voice:before {
     content: '\e63d';
     font-family: IconFont;
     font-size: 18px;
+    position: absolute;
   }
-  
   .player-option .option .volume .mute:before {
     content: '\e63b';
     font-family: IconFont;
     font-size: 18px;
+    line-height: 22px;
+    position: absolute;
   }
-  
   .player-option .option .volume .voice-line {
     height: 3px;
     width: 80px;
@@ -328,18 +314,15 @@
     display: inline-block;
     border-radius: 8px;
   }
-  
   .player-option .option .volume .voice-line .line-now {
     width: 50%;
     height: 100%;
     background: #A0A0A0;
     position: relative;
   }
-  
   .player-option .option .volume .voice-line:hover .line-now {
     background: #1DB954;
   }
-  
   .player-option .option .volume .voice-line .line-now:before {
     content: '';
     width: 12px;
@@ -351,29 +334,24 @@
     display: none;
     position: absolute;
   }
-  
   .player-option .option .volume .voice-line:hover .line-now:before {
     display: inline-block;
   }
-  
   .player-option .option ul {
     margin: 20px 0
   }
-  
   .player-option .option li {
     display: inline-block;
     color: #a0a0a0;
     transition: all 0.1s ease-in;
   }
-  
   .player-option .option .list {
     padding: 0 20px
   }
-  
   .player-option .option {
-    margin: 30px 0
+    margin: 30px 0;
+    display: inline-flex;
   }
-  
   .player-option .option .volume {
     display: inline-flex;
     align-items: center;

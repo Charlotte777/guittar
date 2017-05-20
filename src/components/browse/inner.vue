@@ -1,6 +1,16 @@
 <template>
     <div class="browse">
-        <div class="seach">dasd</div>
+        <div class="info-box">
+            <div class="arrow">
+                <span class="last"></span>
+                <span class="next"></span>
+                <input type="type" class="seach" value="Search"/>
+            </div>    
+            <div class="user-info">
+                <img class="img" src="/static/images/video3.jpg", />
+                <span class="user">啾啾啾-LH7</span>
+            </div>
+        </div>
         <div class="banner-container">
             <div class="banner"></div>
             <div class="album">
@@ -201,4 +211,17 @@
     .browse .guittar-container ul li.active .slider {
         opacity: 1;
     }
+    .last:before {
+    content: '\e501';
+    font-family: IconFont;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  .next:before {
+    content: '\e601';
+    font-family: IconFont;
+    cursor: pointer;
+    font-size: 20px;
+  }
 </style>

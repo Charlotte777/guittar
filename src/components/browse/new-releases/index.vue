@@ -4,7 +4,7 @@
       <span class="s">The Best New Releases</span>
     </div>
     <div class="best-song">
-      <guittar-list v-for="i in list" :todo="i"></guittar-list>
+      <guittar-list v-for="i in list" :todo="i" key="i.artist"></guittar-list>
     </div>
   </div>
 </template>

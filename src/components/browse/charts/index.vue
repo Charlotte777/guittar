@@ -16,7 +16,7 @@
     data() {
       return {
         list: [{
-          title: "美国Billboard周榜周榜",
+          title: "美国Billboard周榜",
           img: "/static/images/charts/USA.png",
         }, {
           title: "Beatport全球电子舞曲榜",

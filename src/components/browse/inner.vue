@@ -4,11 +4,11 @@
             <div class="arrow">
                 <span class="last"></span>
                 <span class="next"></span>
-                <input type="type" class="seach" value="Search"/>
-            </div>    
+                <input type="type" class="seach" value="search" />
+            </div>
             <div class="user-info">
-                <img class="img" src="/static/images/video3.jpg", />
-                <span class="user">啾啾啾-LH7</span>
+                <img class="img" src="/static/images/video3.jpg" />
+            <span class="user">啾啾啾-LH7</span>
             </div>
         </div>
         <div class="banner-container">
@@ -212,16 +212,15 @@
         opacity: 1;
     }
     .last:before {
-    content: '\e501';
-    font-family: IconFont;
-    cursor: pointer;
-    font-size: 20px;
-  }
-  
-  .next:before {
-    content: '\e601';
-    font-family: IconFont;
-    cursor: pointer;
-    font-size: 20px;
-  }
+        content: '\e501';
+        font-family: IconFont;
+        cursor: pointer;
+        font-size: 20px;
+    }
+    .next:before {
+        content: '\e601';
+        font-family: IconFont;
+        cursor: pointer;
+        font-size: 20px;
+    }
 </style>

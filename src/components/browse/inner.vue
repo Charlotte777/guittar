@@ -4,11 +4,12 @@
             <div class="arrow">
                 <span class="last"></span>
                 <span class="next"></span>
-                <input type="type" class="seach" value="search" />
+                <i class="fa fa-search"></i>
+                <input type="type" class="seach" placeholder="搜索"/>
             </div>
             <div class="user-info">
                 <img class="img" src="/static/images/video3.jpg" />
-            <span class="user">啾啾啾-LH7</span>
+                <span class="user">啾啾啾-LH7</span>
             </div>
         </div>
         <div class="banner-container">
@@ -113,6 +114,28 @@
         position: absolute;
         width: 100%;
         z-index: -1;
+    }
+    .browse .info-box {
+        display: flex;
+        padding: 10px 5px
+    }
+    .browse .info-box .arrow {
+        flex-grow: 3;
+        color: #858585
+    }
+    .browse .info-box .arrow input {
+        border: medium none;
+        border-radius: 8px;
+        padding: 0 5px;
+    }
+    .browse .info-box .user-info {
+        display: inline-flex;
+        align-items: center;
+        font-size:14px;
+    }
+    .browse .info-box .user-info img {
+        width: 40px;
+        border-radius:50%
     }
     .banner-container .album {
         align-items: stretch;
@@ -219,6 +242,12 @@
     }
     .next:before {
         content: '\e601';
+        font-family: IconFont;
+        cursor: pointer;
+        font-size: 20px;
+    }
+    .user:after {
+        content: '\e60c';
         font-family: IconFont;
         cursor: pointer;
         font-size: 20px;

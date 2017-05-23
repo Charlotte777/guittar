@@ -1,17 +1,20 @@
 <template>
     <div class="browse">
-        <div class="info-box">
-            <div class="arrow">
-                <span class="last"></span>
+         <div class="header">
+            <div class="wrap">
+                <span class="prev"></span>
                 <span class="next"></span>
-                <i class="fa fa-search"></i>
-                <input type="type" class="seach" placeholder="搜索"/>
+                <div class="search-bar">
+                    <i class="fa fa-search"></i>
+                    <input type="text" class="search" placeholder="搜索" spellcheck="false" />
+                </div>
             </div>
             <div class="user-info">
-                <img class="img" src="/static/images/video3.jpg" />
+                <img class="avatar" src="/static/images/video3.jpg" />
                 <span class="user">啾啾啾-LH7</span>
             </div>
         </div>
+
         <div class="banner-container">
             <div class="banner"></div>
             <div class="album">
@@ -115,28 +118,6 @@
         width: 100%;
         z-index: -1;
     }
-    .browse .info-box {
-        display: flex;
-        padding: 10px 5px
-    }
-    .browse .info-box .arrow {
-        flex-grow: 3;
-        color: #858585
-    }
-    .browse .info-box .arrow input {
-        border: medium none;
-        border-radius: 8px;
-        padding: 0 5px;
-    }
-    .browse .info-box .user-info {
-        display: inline-flex;
-        align-items: center;
-        font-size:14px;
-    }
-    .browse .info-box .user-info img {
-        width: 40px;
-        border-radius:50%
-    }
     .banner-container .album {
         align-items: stretch;
         display: flex;
@@ -233,23 +214,81 @@
     }
     .browse .guittar-container ul li.active .slider {
         opacity: 1;
+    }.browse .header {
+        display: flex;
+        padding: 10px 5px 8px;
+        align-items: center;
+        justify-content: space-between;
     }
-    .last:before {
+    .browse .header .wrap {
+        display: inline-flex;
+    }
+    .browse .header .wrap .prev {
+        margin-left: 15px;
+        margin-right: 10px;
+    }
+    .browse .header .wrap .next {
+        margin-right: 30px;
+    }
+    .browse .header .wrap .prev:before {
         content: '\e501';
         font-family: IconFont;
         cursor: pointer;
-        font-size: 20px;
+        font-size: 25px;
     }
-    .next:before {
+    .browse .header .wrap .next:before {
         content: '\e601';
         font-family: IconFont;
         cursor: pointer;
-        font-size: 20px;
+        font-size: 25px;
     }
-    .user:after {
+    .browse .header .wrap .search-bar {
+        height: 24px;
+        background-color: #FFFFFF;
+        border-radius: 25px;
+        padding: 0px 10px;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+    }
+    .browse .header .wrap .search-bar .fa-search {
+        top: 2px;
+        left: 5px;
+        color: #181818;
+        position: absolute;
+    }
+    .browse .header .wrap .search-bar .fa-search:before {
+        font-size: 13px;
+    }
+    .browse .header .wrap .search-bar input[type=text].search {
+        width: 240px;
+        border: 0;
+        padding-left: 12px;
+        font-size: 14px;
+    }
+    .browse .header .user-info {
+        display: inline-flex;
+        align-items: center;
+        font-size: 14px;
+        color: #FFFFFF;
+    }
+    .browse .header .user-info img.avatar {
+        width: 32px;
+        border-radius: 50%
+    }
+    .browse .header .user-info .user {
+        margin: 0 15px;
+        display: inline-flex;
+        align-items: center;
+    }
+    .browse .header .user-info .user:after {
         content: '\e60c';
         font-family: IconFont;
         cursor: pointer;
-        font-size: 20px;
+        font-size: 30px;
+        margin-top: 3px;
+        line-height: 14px;
+        margin-left: 5px;
     }
+
 </style>

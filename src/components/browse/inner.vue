@@ -72,7 +72,6 @@
                     id: 'concerts',
                     title: 'CONCERTS'
                 }],
-                browse: 'overview',
                 album: {
                     name: "Imagination",
                     artist: 'Lu Han',
@@ -85,7 +84,7 @@
                 let self = this;
                 self.browse = id;
                 self.$router.push({
-                    path: "/browse/" + self.browse
+                    path: "/browse/" + id
                 })
             },
             prev() {
@@ -96,6 +95,14 @@
                 let self = this;
                 self.$router.go(1)
             }
+        }, 
+        computed: {
+             browse(){
+                let self=this;
+                let arr=[];
+                arr=this.$route.fullPath.split("/");
+                return arr[2]
+             }
         },
         components: {
             overview,

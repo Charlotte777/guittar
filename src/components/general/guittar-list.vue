@@ -16,10 +16,7 @@
 
 <script>
     export default {
-        props: ["todo"],
-        mounted() {
-            console.log(this.todo)
-        }
+        props: ["todo"]
     }
 </script>
 
@@ -30,12 +27,11 @@
         margin: 10px 0;
         margin-right: 2.5%;
         width: 18%;
-
     }
     .playlist .s {
         height: 300px;
-        width: 100%;    
-        background-position:center center;
+        width: 100%;
+        background-position: center center;
     }
     .playlist:nth-child(5n+0) {
         margin-right: 0;

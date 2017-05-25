@@ -27,6 +27,9 @@ export default new Router({
                 path: 'charts',
                 component: Browse.charts
             }, {
+                path: 'singer',
+                component: Browse.singer
+            }, {
                 path: 'new-releases',
                 component: Browse.newReleases
             }]

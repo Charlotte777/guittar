@@ -1,9 +1,9 @@
 <template>
     <div class="browse">
-         <div class="header">
+        <div class="header">
             <div class="wrap">
-                <span class="prev"></span>
-                <span class="next"></span>
+                <span class="prev" @click="prev"></span>
+                <span class="next" @click="next"></span>
                 <div class="search-bar">
                     <i class="fa fa-search"></i>
                     <input type="text" class="search" placeholder="搜索" spellcheck="false" />
@@ -14,7 +14,6 @@
                 <span class="user">啾啾啾-LH7</span>
             </div>
         </div>
-
         <div class="banner-container">
             <div class="banner"></div>
             <div class="album">
@@ -61,8 +60,8 @@
                     id: 'charts',
                     title: 'CHARTS'
                 }, {
-                    id: 'genres-moods',
-                    title: 'GENRES & MOODS'
+                    id: 'singer',
+                    title: 'singer'
                 }, {
                     id: 'new-releases',
                     title: 'NEW RELEASES'
@@ -85,6 +84,17 @@
             jumpto(id) {
                 let self = this;
                 self.browse = id;
+                self.$router.push({
+                    path: "/browse/" + self.browse
+                })
+            },
+            prev() {
+                 let self = this;
+                self.$router.go(-1)
+            },
+            next(){
+                let self = this;
+                self.$router.go(1)
             }
         },
         components: {
@@ -214,7 +224,8 @@
     }
     .browse .guittar-container ul li.active .slider {
         opacity: 1;
-    }.browse .header {
+    }
+    .browse .header {
         display: flex;
         padding: 10px 5px 8px;
         align-items: center;
@@ -290,5 +301,4 @@
         line-height: 14px;
         margin-left: 5px;
     }
-
 </style>

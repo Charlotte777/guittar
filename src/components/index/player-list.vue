@@ -128,6 +128,7 @@
           let duration = self.$refs.player.duration;
           self.width = ((self.mMove(ev).x - barLeft) / barWidth) * 100 + '%';
           self.$refs.player.currentTime = duration * parseFloat(self.width) / 100;
+          self.changeProgress();
         }
         draging(event);
         self.$refs.progress.onmousemove = function(ev) {
@@ -264,22 +265,32 @@
     position: relative;
     vertical-align: 2px;
     width: 50%;
+    margin: 0 3px;
   }
   .time-line-box .progress-bar .now {
-    background-color: #31c27c;
+    background-color: #A0A0A0;
     display: inline-block;
     height: 3px;
     left: 0;
     max-width: 100%;
     position: absolute;
   }
+  .time-line-box .progress-bar:hover .now {
+    background-color: #31c27c;
+  }
   .time-line-box .progress-bar .now:after {
-    background-color: white;
     content: "";
-    height: 2px;
-    left: 100%;
     position: absolute;
-    width: 2px;
+    width: 12px;
+    height: 12px;
+    right: -5px;
+    top: -5px;
+    background: #FFFFFF;
+    border-radius: 100%;
+    display: none;
+  }
+  .time-line-box .progress-bar:hover .now:after {
+    display: inline-block;
   }
   .player-option {
     display: inline-block;

@@ -1,7 +1,6 @@
 <template>
     <div class="playlist">
-        <div class="s">
-            <img :src="todo.img">
+        <div class="s" :style="{background: 'url(' + todo.img + ')'}">
             <ul class="opacity">
                 <li class="add"></li>
                 <li class="play"></li>
@@ -11,13 +10,16 @@
         <div class="text">
             <h5>{{todo.title }}</h5>
             <span>{{ todo.artist }}</span>
-       </div>
+        </div>
     </div>
 </template>
 
 <script>
     export default {
-        props: ["todo"]
+        props: ["todo"],
+        mounted() {
+            console.log(this.todo)
+        }
     }
 </script>
 
@@ -28,6 +30,12 @@
         margin: 10px 0;
         margin-right: 2.5%;
         width: 18%;
+
+    }
+    .playlist .s {
+        height: 300px;
+        width: 100%;    
+        background-position:center center;
     }
     .playlist:nth-child(5n+0) {
         margin-right: 0;
@@ -77,8 +85,8 @@
         font-size: 38px;
         cursor: pointer
     }
-    .text{
-        text-align:center
+    .text {
+        text-align: center
     }
     @media screen and (max-width:1200px) {
         .playlist .play:before {

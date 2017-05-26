@@ -10,8 +10,8 @@
                 </div>
             </div>
             <div class="user-info">
-                <img class="avatar" src="/static/images/video3.jpg" />
-                <span class="user">啾啾啾-LH7</span>
+                <img class="avatar" :src="i.img" />
+                <span class="user">{{ i.userName }}</span>
             </div>
         </div>
         <div class="banner-container">
@@ -72,6 +72,10 @@
                     id: 'concerts',
                     title: 'CONCERTS'
                 }],
+                i: {
+                    img: "/static/images/tourist.png",
+                    userName: "请登录"
+                },
                 album: {
                     name: "Imagination",
                     artist: 'Lu Han',
@@ -88,21 +92,27 @@
                 })
             },
             prev() {
-                 let self = this;
+                let self = this;
                 self.$router.go(-1)
             },
-            next(){
+            next() {
                 let self = this;
                 self.$router.go(1)
             }
-        }, 
+        },
         computed: {
-             browse(){
-                let self=this;
-                let arr=[];
-                arr=this.$route.fullPath.split("/");
+            browse() {
+                let self = this;
+                let arr = [];
+                arr = this.$route.fullPath.split("/");
                 return arr[2]
-             }
+            },
+        },
+        mounted() {//获取用户信息
+            let self = this;
+            let info = self.$store.state.userInfo;
+            self.i.userName = info.nickname;
+            self.i.img = info.avatarUrl;
         },
         components: {
             overview,
@@ -292,6 +302,7 @@
     }
     .browse .header .user-info img.avatar {
         width: 32px;
+        height: 32px;
         border-radius: 50%
     }
     .browse .header .user-info .user {
@@ -303,7 +314,7 @@
         content: '\e60c';
         font-family: IconFont;
         cursor: pointer;
-        font-size: 30px;
+        font-size: 22px;
         margin-top: 3px;
         line-height: 14px;
         margin-left: 5px;

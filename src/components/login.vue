@@ -41,7 +41,14 @@
             Axios.get('/login/cellphone?phone=' + username + '&password=' + password).then(
               function(res) {
                 let result = JSON.parse(res.request.responseText)
-                console.log(result)
+                if (result.code == 200) {
+                  self.$store.state.userInfo = result.profile;
+                  self.$router.push({
+                    path: '/'
+                  })
+                } else {
+                  alert('密码错误')
+                }
               }
             )
           }
@@ -64,7 +71,6 @@
     background-position: center center;
     background-size: cover;
   }
-  
   .login .login-container {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
@@ -74,12 +80,10 @@
     position: absolute;
     width: 100%;
   }
-  
   .login .login-container .login_img {
+    margin: 10px auto;
     margin-bottom: 15px;
-    text-align: center;
   }
-  
   .login .login-container .login_input {
     width: 270px;
     box-sizing: border-box;

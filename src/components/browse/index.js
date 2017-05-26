@@ -9,5 +9,5 @@ export default {
     overview,
     charts,
     newReleases,
-    singer
+    singer,
 }

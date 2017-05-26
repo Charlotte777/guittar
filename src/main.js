@@ -7,17 +7,17 @@ import Router from './router'
 
 Vue.use(Vuex);
 Vue.use(Router);
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 const store = new Vuex.Store({
     state: {
-        count: 0
+        userInfo: "0"
     },
-    mutations: {
-        increment(state) {
-            state.count++
-        }
-    }
+    // mutations: {
+    //     increment(state) {
+    //         state.count++
+    //     }
+    // }
 })
 
 /* eslint-disable no-new */

@@ -107,7 +107,7 @@
       overviewList,
       overviewSong,
       overviewVideo
-    },
+    }
   }
 </script>
 

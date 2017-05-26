@@ -238,7 +238,7 @@
     font-size: 30px;
   }
   .player .controller .next:before {
-    content: '\e67d';
+    content: '\e61e';
     font-family: IconFont;
   }
   .player .controller .loop:before {

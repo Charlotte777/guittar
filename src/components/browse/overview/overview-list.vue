@@ -1,6 +1,6 @@
 <template>
   <div class="song">
-    <div class="song-images">
+    <div class="song-images" @click="jumpto">
       <img :src="todo.src">
       <span class="listened">985</span>
       <span class="play"></span>
@@ -9,12 +9,28 @@
       <p class="name">{{ todo.name }}</p>
       <span class="artist">{{ todo.desc }}</span>
     </div>
+    <component :is="songlist"></component>
   </div>
 </template>
 
 <script>
+  import songList from '../../general/song-list'
   export default {
-    props: ["todo"]
+    props: ["todo"],
+    data() {
+      return {
+        songlist: ''
+      }
+    },
+    components: {
+      songList
+    },
+    methods: {
+      jumpto() {
+        let self = this;
+        self.songlist = songList;
+      }
+    }
   }
 </script>
 

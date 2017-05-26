@@ -1,19 +1,5 @@
 <template>
     <div class="browse">
-        <div class="header">
-            <div class="wrap">
-                <span class="prev" @click="prev"></span>
-                <span class="next" @click="next"></span>
-                <div class="search-bar">
-                    <i class="fa fa-search"></i>
-                    <input type="text" class="search" placeholder="搜索" spellcheck="false" />
-                </div>
-            </div>
-            <div class="user-info">
-                <img class="avatar" :src="i.img" />
-                <span class="user">{{ i.userName }}</span>
-            </div>
-        </div>
         <div class="banner-container">
             <div class="banner"></div>
             <div class="album">
@@ -72,10 +58,6 @@
                     id: 'concerts',
                     title: 'CONCERTS'
                 }],
-                i: {
-                    img: "/static/images/tourist.png",
-                    userName: "请登录"
-                },
                 album: {
                     name: "Imagination",
                     artist: 'Lu Han',
@@ -90,14 +72,6 @@
                 self.$router.push({
                     path: "/browse/" + id
                 })
-            },
-            prev() {
-                let self = this;
-                self.$router.go(-1)
-            },
-            next() {
-                let self = this;
-                self.$router.go(1)
             }
         },
         computed: {
@@ -107,12 +81,6 @@
                 arr = this.$route.fullPath.split("/");
                 return arr[2]
             },
-        },
-        mounted() {//获取用户信息
-            let self = this;
-            let info = self.$store.state.userInfo;
-            self.i.userName = info.nickname;
-            self.i.img = info.avatarUrl;
         },
         components: {
             overview,
@@ -241,82 +209,5 @@
     }
     .browse .guittar-container ul li.active .slider {
         opacity: 1;
-    }
-    .browse .header {
-        display: flex;
-        padding: 10px 5px 8px;
-        align-items: center;
-        justify-content: space-between;
-    }
-    .browse .header .wrap {
-        display: inline-flex;
-    }
-    .browse .header .wrap .prev {
-        margin-left: 15px;
-        margin-right: 10px;
-    }
-    .browse .header .wrap .next {
-        margin-right: 30px;
-    }
-    .browse .header .wrap .prev:before {
-        content: '\e501';
-        font-family: IconFont;
-        cursor: pointer;
-        font-size: 25px;
-    }
-    .browse .header .wrap .next:before {
-        content: '\e601';
-        font-family: IconFont;
-        cursor: pointer;
-        font-size: 25px;
-    }
-    .browse .header .wrap .search-bar {
-        height: 24px;
-        background-color: #FFFFFF;
-        border-radius: 25px;
-        padding: 0px 10px;
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-    }
-    .browse .header .wrap .search-bar .fa-search {
-        top: 2px;
-        left: 5px;
-        color: #181818;
-        position: absolute;
-    }
-    .browse .header .wrap .search-bar .fa-search:before {
-        font-size: 13px;
-    }
-    .browse .header .wrap .search-bar input[type=text].search {
-        width: 240px;
-        border: 0;
-        padding-left: 12px;
-        font-size: 14px;
-    }
-    .browse .header .user-info {
-        display: inline-flex;
-        align-items: center;
-        font-size: 14px;
-        color: #FFFFFF;
-    }
-    .browse .header .user-info img.avatar {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%
-    }
-    .browse .header .user-info .user {
-        margin: 0 15px;
-        display: inline-flex;
-        align-items: center;
-    }
-    .browse .header .user-info .user:after {
-        content: '\e60c';
-        font-family: IconFont;
-        cursor: pointer;
-        font-size: 22px;
-        margin-top: 3px;
-        line-height: 14px;
-        margin-left: 5px;
     }
 </style>

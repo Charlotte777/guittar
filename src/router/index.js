@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Login from '@/components/login'
 import Index from '@/components/index'
 import Browse from '@/components/browse'
-import songList from '@/components/general/song-list'
+import songList from '@/components/songlist'
 Vue.use(Router)
 
 export default new Router({
@@ -23,11 +23,7 @@ export default new Router({
             component: Browse.index,
             children: [{
                 path: 'overview',
-                component: Browse.overview,
-                children: [{
-                    path: ':list',
-                    component: songList
-                }, ]
+                component: Browse.overview
             }, {
                 path: 'charts',
                 component: Browse.charts
@@ -38,6 +34,10 @@ export default new Router({
                 path: 'new-releases',
                 component: Browse.newReleases
             }]
+        }, {
+            path: 'songlist',
+            name: 'songlist',
+            component: songList
         }]
     }]
 })

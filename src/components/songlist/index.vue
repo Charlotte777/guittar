@@ -1,7 +1,7 @@
 <template>
-  <div class="song-lists"> //歌曲列表 
+  <div class="song-lists"> 
     <div class="list-header">
-        <div class="cover"><img src="/static/images/video2.jpg"></div>
+        <div class="cover"><img src="/static/images/video1.jpg"></div>
         <div class="info">
             <h4>My youth is yours</h4>
             <span>By</span><span>sda</span>

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-  import songList from '../../general/song-list'
+  import songList from '../../songlist'
   export default {
     props: ["todo"],
     data() {
@@ -28,8 +28,13 @@
     methods: {
       jumpto() {
         let self = this;
-        self.songlist = songList;
+        self.$router.push({
+          path: "/songlist"
+        })
       }
+    },
+    mounted() {
+      console.log(this)
     }
   }
 </script>

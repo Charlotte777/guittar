@@ -24,11 +24,11 @@
     padding-bottom: 10px;
   }
   .lists .number {
-    flex-grow: 2;
     text-align: center;
+    width:20%
   }
   .lists .song-info {
-    flex-grow: 6
+    width:55%
   }
   .lists .song-info .songtitle {
     color: #fff;
@@ -38,6 +38,7 @@
     font-size: 14px;
   }
   .lists .time {
-    flex-grow: 2
+    text-align:center;
+    width:20%
   }
 </style>

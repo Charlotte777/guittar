@@ -38,10 +38,10 @@ import lists from './lists'
           artist:"Years & Years",
           time:"4:15"
         },{
-          number:'1.',
-          songtitle:"Shine",
-          album:'Communion (Deluxe)',
-          artist:"Years & Years",
+          number:'2.',
+          songtitle:"First Timehttps://github.com/posva/catimg  ",
+          album:'First Time',
+          artist:"Ellie Goulding",
           time:"4:15"
         },{
           number:'1.',

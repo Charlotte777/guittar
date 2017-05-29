@@ -1,6 +1,5 @@
 <template>
   <div class="lists">
-    <div class="number"><span>{{ todo.number }}</span></div>
     <div class="song-info">
       <p class="songtitle">{{ todo.songtitle }}</p>
       <p class="album"><span style="margin-right: 5px">{{todo.artist}}</span>-<span style="margin-left: 5px">{{ todo.album }}</span></p>

@@ -10,6 +10,7 @@
       </div>
     </div>
     <div class="song-list">
+      <i class="fa fa-search"></i><input type="text" value="搜索" />
       <lists v-for="i in songinfo" :todo="i" :key="i.number" ></lists>
     </div>
   </div>

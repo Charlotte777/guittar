@@ -9,10 +9,8 @@
         <h5><span>{{i.number}}</span>songs <guittar-button :todo="play"></guittar-button></h5>
       </div>
     </div>
-    <div class="song-list">
-      <i class="fa fa-search"></i><input type="text" value="搜索" />
-      <lists v-for="i in songinfo" :todo="i" :key="i.number" ></lists>
-    </div>
+   
+      <lists></lists>
   </div>
 </template>
 
@@ -32,43 +30,6 @@ import lists from './lists'
         play:{
           value:"播放全部"
         },
-        songinfo:[{
-          number:'1.',
-          songtitle:"Shine",
-          album:'Communion (Deluxe)',
-          artist:"Years & Years",
-          time:"4:15"
-        },{
-          number:'2.',
-          songtitle:"First Timehttps://github.com/posva/catimg  ",
-          album:'First Time',
-          artist:"Ellie Goulding",
-          time:"4:15"
-        },{
-          number:'1.',
-          songtitle:"Shine",
-          album:'Communion (Deluxe)',
-          artist:"Years & Years",
-          time:"4:15"
-        },{
-          number:'1.',
-          songtitle:"Shine",
-          album:'Communion (Deluxe)',
-          artist:"Years & Years",
-          time:"4:15"
-        },{
-          number:'1.',
-          songtitle:"Shine",
-          album:'Communion (Deluxe)',
-          artist:"Years & Years",
-          time:"4:15"
-        },{
-          number:'1.',
-          songtitle:"Shine",
-          album:'Communion (Deluxe)',
-          artist:"Years & Years",
-          time:"4:15"
-        }]
       }
     },
     components:{

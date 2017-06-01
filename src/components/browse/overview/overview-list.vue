@@ -33,8 +33,8 @@
         })
       }
     },
-    mounted() {
-      console.log(this)
+    beforeMount(){
+      
     }
   }
 </script>

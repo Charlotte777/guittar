@@ -4,9 +4,9 @@
       <span class="s">最新歌曲</span>
     </div>
     <div class="new-song">
-      <div class="song" v-for="i in song">
+      <div class="song" v-for="(i, index) in song">
         <div class="img">
-          <span>{{ i.Number }}</span><img :src="i.img">
+          <span>{{ (index<9)? "0"+(index+1):(index+1) }}</span><img :src="i.img">
           <span class="opacity"></span>
         </div>
         <div class="info">
@@ -19,62 +19,30 @@
 </template>
 
 <script>
+  import Axios from 'axios'
   export default {
     props: ["todo"],
     data() {
       return {
-        song: [{
-          Number:"01",
-          songName: "Invisible",
-          songArtist: "Linkin Park",
-          img:"/static/images/yogalin2.jpg",
-        },{
-          Number:"02",
-          songName: "虎口脱险",
-          songArtist: "老狼",
-          img:"/static/images/yogalin.jpg",
-        },{
-          Number:"03",
-          songName: "莫斯科没有眼泪",
-          songArtist: "Twins",
-          img:"/static/images/lu4.jpg",
-        },{
-          Number:"04",
-          songName: "无所谓",
-          songArtist: "方大同 / 张靓颖",
-          img:"/static/images/lu1.jpg",
-        },{
-          Number:"05",
-          songName: "幸福的节拍",
-          songArtist: "杨丞琳",
-          img:"/static/images/by.jpg",
-        },{
-          Number:"06",
-          songName: "成全 (Live)",
-          songArtist: "Yoga Lin",
-          img:"/static/images/yogalin2.jpg",
-        },{
-          Number:"07",
-          songName: "左边",
-          songArtist: "王珞丹",
-          img:"/static/images/tc.jpg",
-        },{
-          Number:"08",
-          songName: "下个转弯是你吗",
-          songArtist: "杨丞琳",
-          img:"/static/images/lu1.jpg",
-        },{
-          Number:"09",
-          songName: "失忆的金鱼",
-          songArtist: "杨丞琳杨丞琳",
-          img:"/static/images/yogalin2.jpg",
-        },{
-          Number:"10",
-          songName: "成全 (Live)",
-          songArtist: "Yoga Lin",
-          img:"/static/images/by.jpg",
-        } ]
+        song: []
       }
+    },
+    beforeMount() {
+      let self = this;
+      Axios.get('/personalized/newsong').then(
+        function(res) {
+          let arr = res.data.result;
+          for (let i = 0; i < arr.length; i++) {
+            self.song.push({});
+            self.song[i].songName = arr[i].name;
+            self.song[i].img = arr[i].song.album.picUrl;
+            let artists = res.data.result[i].song.artists;
+            for (let n = 0; n < artists.length; n++) {
+              self.song[i].songArtist = artists[n].name
+            }
+          }
+        }
+      )
     }
   }
 </script>
@@ -85,26 +53,25 @@
     border-bottom: 1px solid #282828;
     padding: 10px 0;
   }
-  .title{
-  font-size: 18px
-}
+  .title {
+    font-size: 18px
+  }
   .overview-song .new-song .song {
     display: inline-flex;
   }
-  .overview-song .new-song .opacity{
-        position: absolute;
+  .overview-song .new-song .opacity {
+    position: absolute;
     left: 36px;
     top: 8px;
-     opacity:0;
+    opacity: 0;
   }
-  
   .overview-song .new-song .opacity::before {
     content: '\e61c';
     font-family: IconFont;
-    font-size: 22px;  
+    font-size: 22px;
   }
-  .overview-song .new-song .song:hover .opacity{
-    opacity:1;
+  .overview-song .new-song .song:hover .opacity {
+    opacity: 1;
     transition: all 0.3s
   }
   .overview-song .new-song .song {
@@ -112,32 +79,30 @@
     margin: 5px 0;
     padding: 10px 5px;
     width: 50%;
-    transition:all 0.2s;
+    transition: all 0.2s;
   }
-   .overview-song .new-song .song:hover{
-     background: #232529 none repeat scroll 0 0;
-     color:#ffffff;
-   }
+  .overview-song .new-song .song:hover {
+    background: #232529 none repeat scroll 0 0;
+    color: #ffffff;
+  }
   .overview-song .new-song .song .img {
     display: inline-flex;
     width: 70px;
-    position:relative
+    position: relative
   }
-  
   .overview-song .new-song .song .img img {
     width: 40px;
     margin-left: 8px;
-    height:40px;
+    height: 40px;
   }
-  
   .overview-song .new-song .song .info {
     font-size: 14px;
   }
-  .overview-song .new-song .song .info{
-    margin-left:8px;  
+  .overview-song .new-song .song .info {
+    margin-left: 8px;
   }
   .overview-song .new-song .song .info .artist {
     color: #A0A0A0;
-    cursor:pointer;
+    cursor: pointer;
   }
 </style>

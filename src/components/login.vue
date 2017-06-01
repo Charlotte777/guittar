@@ -6,9 +6,19 @@
         <guittar-input :todo="username"></guittar-input>
         <guittar-input :todo="password"></guittar-input>
         <guittar-switch></guittar-switch>
-        <guittar-button :todo="login" style="text-align: center;"></guittar-button>
+        <guittar-button :todo="login" style="text-align: center;" ></guittar-button>
       </div>
     </div>
+    <hsy-dialog class="confirm" v-model="visible">
+      <div slot="title">Remove</div>
+      <div slot="body">
+        <div>This operation is irreversible, are you sure?</div>
+        <div>
+          <button @click="handleYes">Yes</button>
+          <button>No</button>
+        </div>
+      </div>
+    </hsy-dialog>
   </div>
 </template>
 
@@ -27,6 +37,7 @@
           value: '',
           name: 'username'
         },
+        visible: false,
         password: {
           type: 'password',
           placeholder: 'Password',
@@ -38,6 +49,7 @@
           click() {
             let username = self.username.value;
             let password = self.password.value;
+            self.visible=true;
             Axios.get('/login/cellphone?phone=' + username + '&password=' + password).then(
               function(res) {
                 let result = JSON.parse(res.request.responseText)
@@ -47,7 +59,7 @@
                     path: '/'
                   })
                 } else {
-                  alert('密码错误')
+                  handleYes()
                 }
               }
             )
@@ -55,10 +67,15 @@
         }
       }
     },
+    methods: {
+      handleYes() {
+        this.visible = false
+      }
+    },
     components: {
       guittarInput,
       guittarSwitch,
-      guittarButton
+      guittarButton,
     }
   }
 </script>

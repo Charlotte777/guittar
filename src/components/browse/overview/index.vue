@@ -23,6 +23,7 @@
   import overviewList from './overview-list'
   import overviewSong from './overview-song'
   import overviewVideo from './overview-video'
+  import Axios from 'axios'
   export default {
     props: ["todo"],
     data() {
@@ -102,6 +103,11 @@
           self.page++;
         }
       }
+    },
+    beforeMount(){
+      // Axios.get(/personalized).then(
+
+      // )
     },
     components: {
       overviewList,

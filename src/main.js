@@ -4,9 +4,11 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import App from './App'
 import Router from './router'
+import Dialog from 'hsy-vue-dialog'
 
 Vue.use(Vuex);
 Vue.use(Router);
+Vue.use(Dialog);
 Vue.config.productionTip = false;
 
 const store = new Vuex.Store({

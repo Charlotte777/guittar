@@ -13,7 +13,7 @@
             <div class="th-clock"><i class="fa fa-clock-o"></i></div>
           </li>
           <li class="td" v-for="i in li">
-            <div class="s"><i class="fa fa-youtube-play"></i></div>
+            <div class="s"><i class="fa fa-play-circle-o"></i></div>
             <div class="th-title">{{ i.title }}</div>
             <div class="th-artist">{{ i.artist }}</div>
             <div class="th-ablum">{{ i.ablum }}</div>
@@ -79,6 +79,12 @@
           ablum: "Xperience",
           calendar: "23小时前",
           time: "3:51"
+        }, {
+          title: "某时某刻 Catch me when I fall",
+          artist: "鹿晗",
+          ablum: "Xperience",
+          calendar: "23小时前",
+          time: "3:51"
         }]
       }
     }
@@ -87,56 +93,59 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-.song-list{
+  .song-list {
     background: #292929 none repeat scroll 0 0;
     padding: 20px 30px;
-}
-.th {
+  }
+  .th {
     margin: 10px 0;
-}
-.th, .td{
+  }
+  .th,
+  .td {
     padding-left: 10px;
-}
-.th div, .td div {
+  }
+  .th div,
+  .td div {
     color: #7c7c7c;
     display: inline-block;
     font-size: 14px;
-}
-.s {
+  }
+  .s {
     width: 5%;
-}
-.th-title {
+  }
+  .th-title {
     width: 30%;
-}
-.th-artist {
+  }
+  .th-artist {
     width: 20%;
-}
-.th-ablum{
+  }
+  .th-ablum {
     width: 22%;
-}
-.th-calendar {
+  }
+  .th-calendar {
     width: 10%;
-}
-.th-clock {
+  }
+  .th-clock {
     width: 7%;
-}
-.td div {
+  }
+  .td div {
     color: #ffffff;
     font-size: 14px;
     margin: 10px 0;
-}
-.td{
+  }
+  .td {
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
-    border-color: #292929 currentcolor;
+    border-color: #404040 currentcolor;
     border-image: none;
     border-style: solid none;
     border-width: 1px 0;
-}
-.search-bar   {
+    border-top: none;
+    cursor:pointer
+  }
+  .search-bar {
     -moz-box-align: center;
     align-items: center;
     background-color: #292929;
@@ -146,21 +155,21 @@
     padding: 0 10px;
     position: relative;
     width: 100%;
-    margin-bottom:10px;
-}
-.search-bar:focus {
+    margin-bottom: 10px;
+  }
+  .search-bar:focus {
     background: #404040 none repeat scroll 0 0;
-}
-.search-bar .fa-search::before {
+  }
+  .search-bar .fa-search::before {
     font-size: 13px;
-}
-.fa-search {
+  }
+  .fa-search {
     color: #ffffff;
     left: 12px;
     position: absolute;
     top: 2px;
-}
-.search-bar input.search[type="text"] {
+  }
+  .search-bar input.search[type="text"] {
     background: #292929 none repeat scroll 0 0;
     border: 0 none;
     border-radius: 15px;
@@ -168,8 +177,11 @@
     font-size: 14px;
     padding: 12px 20px;
     width: 100%;
-}
-.search-bar input.search:focus {
+  }
+  .search-bar input.search:focus {
     background: #404040 none repeat scroll 0 0;
-}
+  }
+  .s i{
+    font-size:17px;
+  }
 </style>

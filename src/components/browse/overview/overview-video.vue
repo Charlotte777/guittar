@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import Axios from 'axios'
   export default {
     props: ["todo"],
     data(){
@@ -37,7 +38,22 @@
           info:"原谅我眼里都是人间烟火"
         }]
       }
-    }
+      },
+      beforeMount(){
+        let self=this;
+        Axios.get('/personalized/djprogram').then(
+          function(res){
+            let arr=res.data.result;
+            console.log(arr)
+            for(let i=0;i<arr.length;i++){
+              self.video[i].title=arr[i].name;
+              self.video[i].img=arr[i].picUrl;
+              self.video[i].info=arr[i].program.dj.brand;
+            }
+          }
+        )
+      }
+    
   }
 </script>
 

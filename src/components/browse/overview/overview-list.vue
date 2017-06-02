@@ -2,7 +2,7 @@
   <div class="song">
     <div class="song-images" @click="jumpto">
       <img :src="todo.src">
-      <span class="listened">985</span>
+      <span class="listened">{{ todo.play }}</span>
       <span class="play"></span>
     </div>
     <div class="song-info">

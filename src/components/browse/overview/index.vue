@@ -28,47 +28,7 @@
     props: ["todo"],
     data() {
       return {
-        songLists: [{
-          src: "/static/images/tc.jpg",
-          name: "Something Just Like This",
-          desc: "The Chainsmokers",
-        }, {
-          src: "/static/images/by.jpg",
-          name: "光辉岁月",
-          desc: "Beyond",
-        }, {
-          src: "/static/images/tw.jpg",
-          name: "莫斯科的眼泪",
-          desc: "Twins",
-        }, {
-          src: "/static/images/lu1.jpg",
-          name: "Xplore",
-          desc: "Lu Han",
-        }, {
-          src: "/static/images/lu2.jpg",
-          name: "Promises",
-          desc: "Lu Han",
-        }, {
-          src: "/static/images/lu3.jpg",
-          name: "Reload+",
-          desc: "Lu Han",
-        }, {
-          src: "/static/images/lu4.jpg",
-          name: "Xperience",
-          desc: "Lu Han",
-        }, {
-          src: "/static/images/yogalin1.jpg",
-          name: "全世界倾听你",
-          desc: 'Yoga Lin'
-        }, {
-          src: "/static/images/yogalin.jpg",
-          name: "致姗姗来迟的你",
-          desc: 'Yoga Lin'
-        }, {
-          src: "/static/images/yogalin2.jpg",
-          name: "天真有邪",
-          desc: 'Yoga Lin'
-        }],
+        songLists: [],
         page: 1
       }
     },
@@ -105,9 +65,18 @@
       }
     },
     beforeMount(){
-      // Axios.get(/personalized).then(
-
-      // )
+      let self=this;
+       Axios.get('/personalized').then(
+        function(res){
+          let arr=res.data.result;
+          for(let i=0;i<arr.length;i++){
+            self.songLists.push({});
+            self.songLists[i].name=arr[i].name;
+            self.songLists[i].src=arr[i].picUrl;
+            self.songLists[i].play=arr[i].playCount;
+          }
+        }
+      )
     },
     components: {
       overviewList,

@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import Axios from "axios"
   import guittarList from '../../general/guittar-list'
   export default {
     data(){
@@ -77,6 +78,13 @@
           }
         ]
       }
+    },
+    beforeMount(){
+      Axios.get('/top/list?idx=6').then( 
+        function(res){
+          console.log(res)
+        }
+      )
     },
     components: {
       guittarList

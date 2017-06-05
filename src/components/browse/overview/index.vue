@@ -24,6 +24,7 @@
   import overviewSong from './overview-song'
   import overviewVideo from './overview-video'
   import Axios from 'axios'
+  import VueLazyload from 'vue-lazyload'
   export default {
     props: ["todo"],
     data() {
@@ -33,14 +34,14 @@
       }
     },
     computed: {
-      pagination(){
+      pagination() {
         let self = this;
         let arr = [];
         let lists = self.songLists;
         let i;
-        lists.forEach(function(item,index){
-          let p = Math.floor(index/5);
-          if(i != p){
+        lists.forEach(function(item, index) {
+          let p = Math.floor(index / 5);
+          if (i != p) {
             i = p;
             arr[i] = [];
           }
@@ -62,18 +63,23 @@
         if (self.page < length) {
           self.page++;
         }
+      },
+      lazyload(){
+    this.use(lazyLoad,{
+      
+    })
       }
     },
-    beforeMount(){
-      let self=this;
-       Axios.get('/personalized').then(
-        function(res){
-          let arr=res.data.result;
-          for(let i=0;i<arr.length;i++){
+    beforeMount() {
+      let self = this;
+      Axios.get('/personalized').then(
+        function(res) {
+          let arr = res.data.result;
+          for (let i = 0; i < arr.length; i++) {
             self.songLists.push({});
-            self.songLists[i].name=arr[i].name;
-            self.songLists[i].src=arr[i].picUrl;
-            self.songLists[i].play=arr[i].playCount;
+            self.songLists[i].name = arr[i].name;
+            self.songLists[i].src = arr[i].picUrl;
+            self.songLists[i].play = arr[i].playCount;
           }
         }
       )
@@ -92,46 +98,39 @@
     border-bottom: 1px solid #282828;
     padding: 20px 0
   }
-  
   .overview .overview-list .title .s {
     font-weight: 800;
     font-size: 18px;
   }
-  
   .overview .overview-list .title .prev:before {
     content: '\e501';
     font-family: IconFont;
     cursor: pointer;
     font-size: 20px;
   }
-  
   .overview .overview-list .title .next:before {
     content: '\e601';
     font-family: IconFont;
     cursor: pointer;
     font-size: 20px;
   }
-  
   .overview .overview-list .title .arrow {
     float: right
   }
-  
   .overview .list-content {
     width: 100%;
   }
-
-  .overview .list-content:after{ 
-    font-size: 0; 
-    line-height: 0; 
-    display: block; 
-    visibility: hidden; 
-    clear: both; 
-    overflow: hidden; 
-    width: 0; 
-    height: 0; 
-    content: ''; 
+  .overview .list-content:after {
+    font-size: 0;
+    line-height: 0;
+    display: block;
+    visibility: hidden;
+    clear: both;
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    content: '';
   }
-  
   .overview .list-content .roller {
     display: inline-flex;
     justify-content: space-between;
@@ -142,7 +141,7 @@
     position: relative;
     transition: left .8s;
   }
-  .overview .list-content .roller:first-child{
+  .overview .list-content .roller:first-child {
     margin-left: 0;
   }
   .overview .list-content .roller.active {

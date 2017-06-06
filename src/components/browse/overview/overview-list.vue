@@ -14,12 +14,14 @@
 </template>
 
 <script>
+  import Axios from 'axios'
   import songList from '../../songlist'
   export default {
     props: ["todo"],
     data() {
       return {
-        songlist: ''
+        songlist: '',
+        id: ""
       }
     },
     components: {
@@ -28,13 +30,21 @@
     methods: {
       jumpto() {
         let self = this;
+        let id=self.id;
         self.$router.push({
-          path: "/songlist"
-        })
+          path: "/songlist/detail?id="+id
+         });   
+        Axios.get('/personalized').then(
+          function(res) {
+            let result = res.data.result;
+            for (let i = 0; i < result.length; i++) {
+              self.id = result[i].id
+            }
+          }
+        ) 
       }
     },
-    beforeMount(){
-      
+    beforeMount() {
     }
   }
 </script>

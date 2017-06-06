@@ -20,23 +20,7 @@ import Axios from 'axios'
     props: ["todo"],
     data(){
       return{
-        video:[{
-          img:"/static/images/video.jpg",
-          title:"换一个城市想你，以慰寂寥",
-          info:"去上海邂逅一场动人的节奏"
-        },{
-          img:"/static/images/video1.jpg",
-          title:"【星缘星语】No.165-让我们聊聊月亮2",
-          info:"月球和潮汐有什么关系"
-        },{
-          img:"/static/images/video2.jpg",
-          title:"吴秀波 爱之战（2000）-曾为音乐坚持，只为保留纯真。",
-          info:"吴秀波的音乐坚持之路"
-        },{
-          img:"/static/images/video3.jpg",
-          title:"山洞里的千年真身",
-          info:"原谅我眼里都是人间烟火"
-        }]
+        video:[]
       }
       },
       beforeMount(){
@@ -44,11 +28,13 @@ import Axios from 'axios'
         Axios.get('/personalized/djprogram').then(
           function(res){
             let arr=res.data.result;
-            console.log(arr)
             for(let i=0;i<arr.length;i++){
-              self.video[i].title=arr[i].name;
-              self.video[i].img=arr[i].picUrl;
-              self.video[i].info=arr[i].program.dj.brand;
+              self.video.push({
+                title:arr[i].name,
+                img:arr[i].picUrl,
+                info:arr[i].program.dj.brand
+
+              })
             }
           }
         )

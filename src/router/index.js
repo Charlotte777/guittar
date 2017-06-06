@@ -35,7 +35,7 @@ export default new Router({
                 component: Browse.newReleases
             }]
         }, {
-            path: 'songlist',
+            path: "/songlist/detail?id=",
             name: 'songlist',
             component: songList
         }]

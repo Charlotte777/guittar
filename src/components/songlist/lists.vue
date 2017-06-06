@@ -1,36 +1,43 @@
 <template>
   <div class="song-list">
     <div class="search-bar"><i class="fa fa-search"></i> <input type="text" placeholder="搜索" spellcheck="false" class="search"></div>
-    <div class="lists">
-      <div class="title">
-        <ul>
-          <li class="th">
-            <div class="s"></div>
-            <div class="th-title">标题</div>
-            <div class="th-artist">艺人</div>
-            <div class="th-ablum">专辑</div>
-            <div class="th-calendar"><i class="fa fa-calendar-check-o"></i></div>
-            <div class="th-clock"><i class="fa fa-clock-o"></i></div>
-          </li>
-          <li class="td" v-for="i in li">
-            <div class="s"><i class="fa fa-play-circle-o"></i></div>
-            <div class="th-title">{{ i.title }}</div>
-            <div class="th-artist">{{ i.artist }}</div>
-            <div class="th-ablum">{{ i.ablum }}</div>
-            <div class="th-calendar">{{ i.calendar }}</div>
-            <div class="th-clock">{{ i.time }}</div>
-          </li>
-        </ul>
+   
+      
+     
+      <div class="lists">
+        <div class="title">
+          <ul>
+            <li class="th">
+              <div class="s"></div>
+              <div class="th-title">标题</div>
+              <div class="th-artist">艺人</div>
+              <div class="th-ablum">专辑</div>
+              <div class="th-calendar"><i class="fa fa-calendar-check-o"></i></div>
+              <div class="th-clock"><i class="fa fa-clock-o"></i></div>
+            </li>
+            <li class="td" v-for="i in li">
+              <div class="s"><i class="fa fa-play-circle-o"></i></div>
+              <div class="th-title">{{ i.title }}</div>
+              <div class="th-artist">{{ i.artist }}</div>
+              <div class="th-ablum">{{ i.ablum }}</div>
+              <div class="th-calendar">{{ i.calendar }}</div>
+              <div class="th-clock">{{ i.time }}</div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
+import Axios from 'axios'
   export default {
     props: ["todo"],
     data() {
       return {
+        loading: false,
+        post: null,
+        error: null,
         li: [{
           title: "There for you",
           artist: "Martin Garrix/Troye Sivan",
@@ -87,7 +94,8 @@
           time: "3:51"
         }]
       }
-    }
+    },
+   
   }
 </script>
 
@@ -143,7 +151,7 @@
     border-style: solid none;
     border-width: 1px 0;
     border-top: none;
-    cursor:pointer
+    cursor: pointer
   }
   .search-bar {
     -moz-box-align: center;
@@ -181,7 +189,7 @@
   .search-bar input.search:focus {
     background: #404040 none repeat scroll 0 0;
   }
-  .s i{
-    font-size:17px;
+  .s i {
+    font-size: 17px;
   }
 </style>

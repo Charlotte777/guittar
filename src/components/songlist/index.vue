@@ -1,5 +1,6 @@
 <template>
   <div class="song-lists">
+  
     <div class="list-header">
       <div class="cover"><img src="/static/images/video1.jpg"></div>
       <div class="info">

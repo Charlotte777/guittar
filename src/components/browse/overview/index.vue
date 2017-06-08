@@ -64,10 +64,8 @@
           self.page++;
         }
       },
-      lazyload(){
-    this.use(lazyLoad,{
-      
-    })
+      lazyload() {
+        this.use(lazyLoad, {})
       }
     },
     beforeMount() {
@@ -76,10 +74,12 @@
         function(res) {
           let arr = res.data.result;
           for (let i = 0; i < arr.length; i++) {
-            self.songLists.push({});
-            self.songLists[i].name = arr[i].name;
-            self.songLists[i].src = arr[i].picUrl;
-            self.songLists[i].play = arr[i].playCount;
+            self.songLists.push({
+              id: arr[i].id,
+              name: arr[i].name,
+              src: arr[i].picUrl,
+              play: arr[i].playCount
+            });
           }
         }
       )

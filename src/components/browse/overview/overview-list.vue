@@ -9,7 +9,6 @@
       <p class="name">{{ todo.name }}</p>
       <span class="artist">{{ todo.desc }}</span>
     </div>
-    <component :is="songlist"></component>
   </div>
 </template>
 
@@ -18,33 +17,17 @@
   import songList from '../../songlist'
   export default {
     props: ["todo"],
-    data() {
-      return {
-        songlist: '',
-        id: ""
-      }
-    },
     components: {
       songList
     },
     methods: {
       jumpto() {
         let self = this;
-        let id=self.id;
+        let id = self.todo.id;
         self.$router.push({
-          path: "/songlist/detail?id="+id
-         });   
-        Axios.get('/personalized').then(
-          function(res) {
-            let result = res.data.result;
-            for (let i = 0; i < result.length; i++) {
-              self.id = result[i].id
-            }
-          }
-        ) 
+          path: "/songlist/" + id,
+        });
       }
-    },
-    beforeMount() {
     }
   }
 </script>

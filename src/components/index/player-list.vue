@@ -27,7 +27,7 @@
     </div>
     <div class="player-option">
       <ul class="option">
-        <li class="list"></li>
+        <li class="list" @click="getlist"></li>
         <li class="volume">
           <span :class="{voice:voice,mute:!voice}" @click="mute()"></span>
           <div class="voice-line" @mousedown="adjust($event)" ref="volume">
@@ -156,6 +156,9 @@
         self.$refs.volume.onmouseup = function() {
           this.onmousemove = function() {}
         }
+      },
+      getlist(){
+        
       }
     },
     mounted() {

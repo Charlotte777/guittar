@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from '@/components/login'
 import Index from '@/components/index'
 import Browse from '@/components/browse'
+import songDetails from '@/components/songdetails'
 import songList from '@/components/songlist'
 Vue.use(Router)
 
@@ -35,9 +36,13 @@ export default new Router({
                 component: Browse.newReleases
             }]
         }, {
-            path: "/songlist/detail?id=",
+            path: "/songlist/:lid",
             name: 'songlist',
             component: songList
+        }, {
+            path: "/songdetails",
+            name: 'songdetails',
+            component: songDetails
         }]
     }]
 })

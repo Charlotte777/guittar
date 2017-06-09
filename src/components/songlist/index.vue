@@ -33,14 +33,13 @@
         play: {
           value: "播放全部",
           click() {},
-          width:80
+          width: 80
         },
         list: []
       }
     },
     mounted() {
       let self = this;
-      
     },
     beforeMount() {
       let self = this;
@@ -55,14 +54,15 @@
           self.i.number = header.trackCount;
           self.i.artist = header.creator.nickname;
           for (let i = 0; i < result.length; i++) {
-            for (let n = 0; n < result[i].ar.length; n++) {
-              console.log(result[i])
-              self.list.push({
-                title: result[i].name,
-                artist: result[i].ar[n].name,
-                ablum: result[i].al.name,
-                time: parseInt(result[i].dt/1000/60)+ ':' + parseInt(result[i].dt/1000)%60,
-              })
+            self.list.push({
+              title: result[i].name,
+              ablum: result[i].al.name,
+              time: parseInt(result[i].dt / 1000 / 60) + ':' + parseInt(result[i].dt / 1000) % 60,
+              artist: result[i].ar[0].name
+            })
+            for (let n = 1; n < result[i].ar.length; n++) {
+              self.list[i].artist += '/' + result[i].ar[n].name;
+              // artist: result[i].ar.length == 1 ? result[i].ar[n].name : result[i].ar[n].name + "/" + result[i + 1].ar[n + 1].name,
               // console.log(self.list[i].title)
             }
           }

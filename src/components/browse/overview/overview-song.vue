@@ -33,12 +33,16 @@
         function(res) {
           let arr = res.data.result;
           for (let i = 0; i < arr.length; i++) {
-            self.song.push({});
-            self.song[i].songName = arr[i].name;
-            self.song[i].img = arr[i].song.album.picUrl;
             let artists = res.data.result[i].song.artists;
+            self.song.push({
+              songName: arr[i].name,
+              img: arr[i].song.album.picUrl,
+              songArtist: ""
+            });
+            
             for (let n = 0; n < artists.length; n++) {
-              self.song[i].songArtist = artists[n].name
+              self.song[i].songArtist += artists[n].name;
+              if(n != artist.length) self.song[i].songArtist += "/"
             }
           }
         }

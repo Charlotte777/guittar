@@ -5,8 +5,9 @@
     <h1>播放列表</h1>
     <div class="list-container">
       <ul>
-        <li v-for="i in list" :id="i.id" @click="jumpto(i.id)">
-          <span>{{i.title}}</span>
+        <li v-for="i in list" :id="i.id" @click="jumpto(i.id)" :class="{active:i.id==group} ">
+          <span style="padding-bottom: 5px">{{i.title}}</span>
+          <span class="slider"></span>
         </li>
         <component :is="group"></component>
       </ul>
@@ -23,18 +24,18 @@
       return {
         list: [{
           id: "playing",
-          title: "列表"
+          title: "播放列表"
         }, {
           id: "playRecord",
           title: "播放记录"
         }],
-        group:""
+        group: "playing"
       }
     },
     methods: {
       jumpto(id) {
-        let self=this;
-        self.group=id;
+        let self = this;
+        self.group = id;
       }
     },
     components: {
@@ -53,15 +54,27 @@
     background: linear-gradient(top, #fff, #333);
     background: linear-gradient(bottom, #333, #fff);
     background: linear-gradient(30deg, #fff, #333);
-    
     height: 100px;
   }
   .list-container ul {
     margin: 20px 0
   }
   .list-container ul li {
-    display: inline-block;
+    display: inline-flex;
     margin-right: 40px;
     font-size: 14px;
+    flex-direction: column;
+    cursor:pointer
+  }
+  .list-container ul li .slider {
+    background: #1DB954;
+    height: 2px;
+    width: 30px;
+    display: inline-block;
+    opacity: 0;
+    margin:auto
+  }
+  .list-container ul li.active .slider {
+    opacity: 1;
   }
 </style>

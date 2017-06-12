@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Login from '@/components/login'
 import Index from '@/components/index'
 import Browse from '@/components/browse'
-import songDetails from '@/components/songdetails'
+import playList from '@/components/playlist'
 import songList from '@/components/songlist'
 Vue.use(Router)
 
@@ -40,9 +40,18 @@ export default new Router({
             name: 'songlist',
             component: songList
         }, {
-            path: "/songdetails",
-            name: 'songdetails',
-            component: songDetails
+            path: "/playlist",
+            name: "playlist",
+            component: playList.index,
+            children: [{
+                    path: "playing",
+                    component: playList.playing
+                },
+                {
+                    path: "paly-record",
+                    component: playList.playRecord
+                }
+            ]
         }]
     }]
 })

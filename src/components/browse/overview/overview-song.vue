@@ -39,10 +39,8 @@
               img: arr[i].song.album.picUrl,
               songArtist: ""
             });
-            
             for (let n = 0; n < artists.length; n++) {
-              self.song[i].songArtist += artists[n].name;
-              if(n != artist.length) self.song[i].songArtist += "/"
+              self.song[i].songArtist += artists[n].name + (n != artists.length - 1 ? "/" : "");
             }
           }
         }

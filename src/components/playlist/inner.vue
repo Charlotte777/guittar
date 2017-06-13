@@ -64,7 +64,8 @@
     margin-right: 40px;
     font-size: 14px;
     flex-direction: column;
-    cursor:pointer
+    cursor:pointer;
+    color:#707070
   }
   .list-container ul li .slider {
     background: #1DB954;
@@ -72,9 +73,14 @@
     width: 30px;
     display: inline-block;
     opacity: 0;
-    margin:auto
+    margin:auto;
+    
+  }
+  .list-container ul li.active{
+     color:#fff;
   }
   .list-container ul li.active .slider {
     opacity: 1;
+   
   }
 </style>

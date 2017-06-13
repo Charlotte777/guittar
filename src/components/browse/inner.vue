@@ -95,6 +95,7 @@
     .browse {
         overflow: hidden;
         min-width: 580px;
+        padding-top:50px;
     }
     .browse .banner-container {
         width: 100%;

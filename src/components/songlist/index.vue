@@ -78,6 +78,9 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.song-lists {
+  padding-top:30px;
+}
   .song-lists .list-header {
     display: inline-flex;
     align-items: center;

@@ -1,16 +1,17 @@
 <template>
   <div class="playLists">
-    <div class="banner">
-    </div>
-    <h1>播放列表</h1>
-    <div class="list-container">
-      <ul>
-        <li v-for="i in list" :id="i.id" @click="jumpto(i.id)" :class="{active:i.id==group} ">
-          <span style="padding-bottom: 5px">{{i.title}}</span>
-          <span class="slider"></span>
-        </li>
-        <component :is="group"></component>
-      </ul>
+    <div class="banner"></div>
+    <div class="box">
+      <h1>播放列表</h1>
+      <div class="list-container">
+        <ul>
+          <li v-for="i in list" :id="i.id" @click="jumpto(i.id)" :class="{active:i.id==group} ">
+            <span style="padding-bottom: 5px">{{i.title}}</span>
+            <span class="slider"></span>
+          </li>
+          <component :is="group"></component>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -47,14 +48,13 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .playLists {
-    padding: 0 25px
-  }
+.playLists .box{
+  padding:0 25px;
+}
   .playLists .banner {
-    background: linear-gradient(top, #fff, #333);
-    background: linear-gradient(bottom, #333, #fff);
-    background: linear-gradient(30deg, #fff, #333);
-    height: 100px;
+    background: -moz-linear-gradient( top, #3f3f3f, #181818);
+    background: -webkit-linear-gradient( top, #3f3f3f, #181818);
+    height: 150px;
   }
   .list-container ul {
     margin: 20px 0
@@ -64,8 +64,8 @@
     margin-right: 40px;
     font-size: 14px;
     flex-direction: column;
-    cursor:pointer;
-    color:#707070
+    cursor: pointer;
+    color: #707070
   }
   .list-container ul li .slider {
     background: #1DB954;
@@ -73,14 +73,12 @@
     width: 30px;
     display: inline-block;
     opacity: 0;
-    margin:auto;
-    
+    margin: auto;
   }
-  .list-container ul li.active{
-     color:#fff;
+  .list-container ul li.active {
+    color: #fff;
   }
   .list-container ul li.active .slider {
     opacity: 1;
-   
   }
 </style>

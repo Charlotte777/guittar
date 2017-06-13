@@ -42,14 +42,39 @@
           time: "4:20"
         }],
         nextList:[{
+          title: "There For You",
+          artist: "Martin Garrix",
+          ablum: "There For You",
+          time: "3:41"
+        },{
+          title: "Homegrown",
+          artist: "Haux",
+          ablum: "Homegrown",
+          time: "3:41"
+        },{
           title: "阿婆说",
           artist: "陈一发儿",
           ablum: "阿婆说",
           time: "4:06"
         },{
-          title: "There For You",
-          artist: "Martin Garrix",
-          ablum: "There For You",
+          title: "Embody Me",
+          artist: "Bathing Beach",
+          ablum: "Novo Amor",
+          time: "3:10"
+        },{
+          title: "游园道",
+          artist: "丛帅",
+          ablum: "游园道",
+          time: "3:41"
+        },{
+          title: "阿婆说",
+          artist: "陈一发儿",
+          ablum: "阿婆说",
+          time: "4:06"
+        },{
+          title: "Homegrown",
+          artist: "Haux",
+          ablum: "Homegrown",
           time: "3:41"
         },{
           title: "阿婆说",
@@ -62,14 +87,19 @@
           ablum: "There For You",
           time: "3:41"
         },{
-          title: "阿婆说",
-          artist: "陈一发儿",
-          ablum: "阿婆说",
-          time: "4:06"
+          title: "游园道",
+          artist: "丛帅",
+          ablum: "游园道",
+          time: "3:41"
         },{
-          title: "There For You",
-          artist: "Martin Garrix",
-          ablum: "There For You",
+          title: "Embody Me",
+          artist: "Bathing Beach",
+          ablum: "Novo Amor",
+          time: "3:10"
+        },{
+          title: "游园道",
+          artist: "丛帅",
+          ablum: "游园道",
           time: "3:41"
         },{
           title: "阿婆说",
@@ -77,10 +107,20 @@
           ablum: "阿婆说",
           time: "4:06"
         },{
-          title: "There For You",
-          artist: "Martin Garrix",
-          ablum: "There For You",
+          title: "Embody Me",
+          artist: "Bathing Beach",
+          ablum: "Novo Amor",
+          time: "3:10"
+        },{
+          title: "游园道",
+          artist: "丛帅",
+          ablum: "游园道",
           time: "3:41"
+        },{
+          title: "阿婆说",
+          artist: "陈一发儿",
+          ablum: "阿婆说",
+          time: "4:06"
         }]
       }
     },

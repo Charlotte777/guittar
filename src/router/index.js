@@ -5,6 +5,7 @@ import Index from '@/components/index'
 import Browse from '@/components/browse'
 import playList from '@/components/playlist'
 import songList from '@/components/songlist'
+import find from '@/components/searchpage'
 Vue.use(Router)
 
 export default new Router({
@@ -43,15 +44,10 @@ export default new Router({
             path: "/playlist",
             name: "playlist",
             component: playList.index,
-            children: [{
-                    path: "playing",
-                    component: playList.playing
-                },
-                {
-                    path: "paly-record",
-                    component: playList.playRecord
-                }
-            ]
+        }, {
+            path: "/find",
+            name: "find",
+            component: find,
         }]
     }]
 })

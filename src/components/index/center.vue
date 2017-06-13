@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import Axios from 'axios'
   export default {
     data() {
       return {
@@ -44,6 +45,13 @@
         self.$router.go(1)
       }
     },
+    beforeMount(){
+      Axios.get("/search?keywords=海阔天空").then(
+        function(res){
+          console.log(res)
+        }
+      )
+    }
   }
 </script>
 
@@ -57,6 +65,9 @@
     padding: 10px 5px 8px;
     align-items: center;
     justify-content: space-between;
+    position:fixed;
+    width: calc(100% - 250px);
+    z-index:999;
   }
   .header .wrap {
     display: inline-flex;

@@ -157,8 +157,11 @@
           this.onmousemove = function() {}
         }
       },
-      getlist(){
-        
+      getlist() {
+        let self = this;
+        self.$router.push({
+          path: "/playlist" 
+        })
       }
     },
     mounted() {

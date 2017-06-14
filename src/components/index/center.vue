@@ -6,7 +6,7 @@
         <span class="next" @click="next"></span>
         <div class="search-bar">
           <i class="fa fa-search"></i>
-          <input type="text" class="search" placeholder="搜索" spellcheck="false" />
+          <input type="text" class="search" placeholder="搜索" spellcheck="false" :value="i.value" @keyup.enter="onEnter" v-model="i.value" />
         </div>
       </div>
       <div class="user-info">
@@ -19,13 +19,15 @@
 </template>
 
 <script>
-import Axios from 'axios'
+  import Axios from 'axios'
   export default {
     data() {
+      let self = this;
       return {
         i: {
           img: "/static/images/tourist.png",
-          userName: "请登录"
+          userName: "请登录",
+          value: "",
         },
       }
     },
@@ -43,15 +45,23 @@ import Axios from 'axios'
       next() {
         let self = this;
         self.$router.go(1)
+      },
+      onEnter() {
+        let self = this;
+        Axios.get("/search?keywords=" + self.i.value).then(
+          function(res) {
+            let result = res.data.result.songs;
+            console.log(self)
+            if (res.data.code == 200) {
+              self.$store.state.search = result;
+              self.$router.push({
+                path: '/find'
+              })
+            }
+          }
+        )
       }
     },
-    beforeMount(){
-      Axios.get("/search?keywords=海阔天空").then(
-        function(res){
-          console.log(res)
-        }
-      )
-    }
   }
 </script>
 
@@ -61,13 +71,16 @@ import Axios from 'axios'
     overflow-y: auto
   }
   .header {
-    display: flex;
-    padding: 10px 5px 8px;
+    -moz-box-align: center;
+    -moz-box-pack: justify;
     align-items: center;
+    background: #181818 none repeat scroll 0 0;
+    display: flex;
     justify-content: space-between;
-    position:fixed;
-    width: calc(100% - 250px);
-    z-index:999;
+    padding: 10px 5px 8px;
+    position: fixed;
+    width: calc(100% - 217px);
+    z-index: 999;
   }
   .header .wrap {
     display: inline-flex;

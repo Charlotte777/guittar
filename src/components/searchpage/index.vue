@@ -6,9 +6,9 @@
       <div class="search-container">
         <div class="artist">
           <h3 class="title">艺人</h3>
-          <div class="artist-box">
-            <img src="static/images/lu4.jpg">
-            <span class="name">鹿晗</span>
+          <div class="artist-box" v-for="i in artist">
+            <img :src="i.src">
+            <span class="name">{{ i.name }}</span>
           </div>
         </div>
         <div class="album">
@@ -42,55 +42,45 @@
     props: ["todo"],
     data() {
       return {
-        box: [{
-          src: "static/images/yogalin.jpg",
-          name: "林宥嘉",
-          title: "最好青春换你"
-        }, {
-          src: "static/images/yogalin.jpg",
-          name: "林宥嘉",
-          title: "最好青春换你"
-        }, {
-          src: "static/images/yogalin.jpg",
-          name: "林宥嘉",
-          title: "最好青春换你"
-        }, {
-          src: "static/images/yogalin.jpg",
-          name: "林宥嘉",
-          title: "最好青春换你"
-        }, {
-          src: "static/images/yogalin.jpg",
-          name: "林宥嘉",
-          title: "最好青春换你"
+        artist: [{
+          src: "",
+          name: ""
         }],
-        songlist:[{
-          title:"致爱Your song",
-          artist:"鹿晗",
-          ablum:"Xperience",
-          time:"3:41"
-        },{
-          title:"致爱Your song",
-          artist:"鹿晗",
-          ablum:"Xperience",
-          time:"3:41"
-        },{
-          title:"致爱Your song",
-          artist:"鹿晗",
-          ablum:"Xperience",
-          time:"3:41"
-        },{
-          title:"致爱Your song",
-          artist:"鹿晗",
-          ablum:"Xperience",
-          time:"3:41"
-        }]
+        box: [],
+        songlist: []
       }
     },
-    mounted(){
-      let self=this;
-      console.log(self.$store.state.search)
+    mounted() {
+      let self = this;
+      let result = self.$store.state.search;
+      let searchArtist = self.$store.state.searchArtist;
+      let searchalbum = self.$store.state.searchalbum;
+      for (let i = 0; i < result.length; i++) {
+        let artists = result[i].album.artists;
+        let time = result[i].bMusic.playTime;
+        self.songlist.push({
+          title: result[i].name,
+          album: result[i].album.name,
+          artist: result[i].artists[0].name,
+          time: parseInt(time / 1000 / 60) + ":" + (parseInt(time / 1000 % 60) < 10 ? "0" + parseInt(time / 1000 % 60) : parseInt(time / 1000 % 60)),
+        });
+        for (let n = 1; n < artists.length; n++) {
+          self.songlist[i].artist += " / " + result[i].artists[n].name
+        }
+      };
+      for (let i = 0; i < searchArtist.length; i++) {
+        self.artist[i].name = searchArtist[i].name;
+        self.artist[i].src = searchArtist[i].picUrl;
+      }
+      for (let i = 0; i < searchalbum.length; i++) {
+        self.box.push({
+          src: searchalbum[i].picUrl,
+          title: searchalbum[i].name,
+          title: searchalbum[i].artist.name
+        })
+      }
     },
-    components:{
+    components: {
       list
     }
   }
@@ -154,8 +144,8 @@
   .search-container .album .album-box span {
     font-size: 14px;
   }
-  .song{
-    margin-top:30px;
+  .song {
+    margin-top: 30px;
   }
   .song-list .th {
     border-bottom: 1px solid #282828;

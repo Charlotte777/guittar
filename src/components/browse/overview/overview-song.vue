@@ -40,7 +40,7 @@
               songArtist: ""
             });
             for (let n = 0; n < artists.length; n++) {
-              self.song[i].songArtist += artists[n].name + (n != artists.length - 1 ? "/" : "");
+              self.song[i].songArtist += artists[n].name + (n != artists.length - 1 ? " / " : "");
             }
           }
         }

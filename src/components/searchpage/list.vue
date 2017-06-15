@@ -3,7 +3,7 @@
     <div class="s"><i class="fa fa-play-circle-o"></i></div>
     <div class="th-title">{{ todo.title }}</div>
     <div class="th-artist">{{ todo.artist }}</div>
-    <div class="th-ablum">{{ todo.ablum }}</div>
+    <div class="th-ablum">{{ todo.album }}</div>
     <div class="th-clock">{{ todo.time }}</div>
   </li>
 </template>

@@ -5,7 +5,7 @@ import Index from '@/components/index'
 import Browse from '@/components/browse'
 import playList from '@/components/playlist'
 import songList from '@/components/songlist'
-import find from '@/components/searchpage'
+import find from '@/components/find'
 Vue.use(Router)
 
 export default new Router({

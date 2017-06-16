@@ -48,39 +48,47 @@
       },
       onEnter() {
         let self = this;
-        Axios.get("/search?keywords=" + self.i.value).then(
-          function(res) {
-            let result = res.data.result.songs;
-            if (res.data.code == 200) {
-              self.$store.state.search = result;
-              self.$router.push({
-                path: '/find'
-              })
-            }
+        let value = self.i.value;
+        self.$router.push({
+          path: '/find',
+          query: {
+            s: value
           }
-        )
-        Axios.get("/search?keywords=" + self.i.value + "&type=100").then(
-          function(res) {
-            let result = res.data.result.artists;
-            if (res.data.code == 200) {
-              self.$store.state.searchArtist = result;
-              self.$router.push({
-                path: '/find'
-              })
-            }
-          }
-        )
-        Axios.get("/search?keywords=" + self.i.value + "&type=10").then(
-          function(res) {
-           let result = res.data.result.albums;
-            if (res.data.code == 200) {
-              self.$store.state.searchalbum = result;
-              self.$router.push({
-                path: '/find'
-              })
-            }
-          }
-        )
+        })
+        // let self = this;
+        // Axios.get("/search?keywords=" + self.i.value).then(
+        //   function(res) {
+        //     let result = res.data.result.songs;
+        //     if (res.data.code == 200) {
+        //       self.$store.state.search = result;
+        //       self.$router.push({
+        //         path: '/find'
+        //       })
+        //     }
+        //   }
+        // )
+        // Axios.get("/search?keywords=" + self.i.value + "&type=100").then(
+        //   function(res) {
+        //     let result = res.data.result.artists;
+        //     if (res.data.code == 200) {
+        //       self.$store.state.searchArtist = result;
+        //       self.$router.push({
+        //         path: '/find'
+        //       })
+        //     }
+        //   }
+        // )
+        // Axios.get("/search?keywords=" + self.i.value + "&type=10").then(
+        //   function(res) {
+        //    let result = res.data.result.albums;
+        //     if (res.data.code == 200) {
+        //       self.$store.state.searchalbum = result;
+        //       self.$router.push({
+        //         path: '/find'
+        //       })
+        //     }
+        //   }
+        // )
       }
     },
   }

@@ -2,7 +2,7 @@
   <div class="search">
     <div class="banner"></div>
     <div class="box">
-      <h1>显示以下搜索的结果：<span>There for you </span></h1>
+      <h1>显示以下搜索的结果：<span>{{ result }} </span></h1>
       <div class="search-container">
         <div class="artist">
           <h3 class="title">艺人</h3>
@@ -38,6 +38,7 @@
 
 <script>
   import list from './list'
+  import Axios from 'axios'
   export default {
     props: ["todo"],
     data() {
@@ -47,38 +48,81 @@
           name: ""
         }],
         box: [],
-        songlist: []
+        songlist: [],
+        result: ""
       }
     },
     mounted() {
       let self = this;
-      let result = self.$store.state.search;
-      let searchArtist = self.$store.state.searchArtist;
-      let searchalbum = self.$store.state.searchalbum;
-      for (let i = 0; i < result.length; i++) {
-        let artists = result[i].album.artists;
-        let time = result[i].bMusic.playTime;
-        self.songlist.push({
-          title: result[i].name,
-          album: result[i].album.name,
-          artist: result[i].artists[0].name,
-          time: parseInt(time / 1000 / 60) + ":" + (parseInt(time / 1000 % 60) < 10 ? "0" + parseInt(time / 1000 % 60) : parseInt(time / 1000 % 60)),
-        });
-        for (let n = 1; n < artists.length; n++) {
-          self.songlist[i].artist += " / " + result[i].artists[n].name
+      self.result = self.$route.query.s;
+      Axios.get("/search?keywords=" + self.result).then(function(res) { //歌曲
+        let songs = res.data.result.songs;
+        for (let i = 0; i < songs.length; i++) {
+          let time = songs[i].bMusic.playTime;
+          let artists = songs[i].artists;
+          self.songlist.push({
+            title: songs[i].name,
+            album: songs[i].album.name,
+            artist: songs[i].artists[0].name,
+            time: parseInt(time / 1000 / 60) + ":" + (parseInt(time / 1000 % 60) < 10 ? "0" + parseInt(time / 1000 % 60) : parseInt(time / 1000 % 60)),
+          })
+          for (let n = 1; n < artists.length; n++) {
+            self.songlist[i].artist += " / " + songs[i].artists[n].name
+          }
         }
-      };
-      for (let i = 0; i < searchArtist.length; i++) {
-        self.artist[i].name = searchArtist[i].name;
-        self.artist[i].src = searchArtist[i].picUrl;
-      }
-      for (let i = 0; i < searchalbum.length; i++) {
-        self.box.push({
-          src: searchalbum[i].picUrl,
-          title: searchalbum[i].name,
-          title: searchalbum[i].artist.name
-        })
-      }
+      })
+      Axios.get("/search?keywords=" + self.result + "&type=100").then( //歌手
+        function(res) {
+          let artists = res.data.result.artists;
+          for (let i = 0; i < artists.length; i++) {
+            self.artist.push({
+              src: artists[i].picUrl,
+              name: artists[i].name,
+            })
+          }
+        }
+      )
+      Axios.get("/search?keywords=" + self.result + "&type=10").then( //专辑
+        function(res) {
+          console.log(res.data.result.albums)
+          let album = res.data.result.albums;
+          for (let i = 0; i < album.length; i++) {
+            self.box.push({
+              src: album[i].picUrl,
+              title: album[i].name,
+              name: album[i].artist.name
+            })
+          }
+        }
+      )
+      // let self = this;
+      // let result = self.$store.state.search;
+      // let searchArtist = self.$store.state.searchArtist;
+      // let searchalbum = self.$store.state.searchalbum;
+      // for (let i = 0; i < result.length; i++) {
+      //   let artists = result[i].album.artists;
+      //   let time = result[i].bMusic.playTime;
+      //   self.songlist.push({
+      //     title: result[i].name,
+      //     album: result[i].album.name,
+      //     artist: result[i].artists[0].name,
+      //     time: parseInt(time / 1000 / 60) + ":" + (parseInt(time / 1000 % 60) < 10 ? "0" + parseInt(time / 1000 % 60) : parseInt(time / 1000 % 60)),
+      //   });
+      //   for (let n = 1; n < artists.length; n++) {
+      //     self.songlist[i].artist += " / " + result[i].artists[n].name
+      //   }
+      // };
+      // for (let i = 0; i < searchArtist.length; i++) {
+      //   self.artist[i].name = searchArtist[i].name;
+      //   self.artist[i].src = searchArtist[i].picUrl;
+      // }
+      // for (let i = 0; i < searchalbum.length; i++) {
+      //   self.box.push({
+      //     src: searchalbum[i].picUrl,
+      //     title: searchalbum[i].name,
+      //     title: searchalbum[i].artist.name
+      //   })
+      // }
     },
     components: {
       list

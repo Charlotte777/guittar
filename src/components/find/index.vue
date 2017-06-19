@@ -13,10 +13,12 @@
         </div>
         <div class="album">
           <h3 class="title">专辑</h3>
-          <div class="album-box" v-for="i in box">
-            <img :src="i.src">
-            <span class="title">{{i.title }}</span>
-            <span class="name">{{i.name }}</span>
+          <div class="boxs">
+            <div class="album-box" v-for="i in box">
+              <img :src="i.src">
+              <p class="title">{{i.title }}</p>
+              <p class="name">{{i.name }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -43,10 +45,7 @@
     props: ["todo"],
     data() {
       return {
-        artist: [{
-          src: "",
-          name: ""
-        }],
+        artist: [],
         box: [],
         songlist: [],
         result: ""
@@ -74,7 +73,7 @@
       Axios.get("/search?keywords=" + self.result + "&type=100").then( //歌手
         function(res) {
           let artists = res.data.result.artists;
-          for (let i = 0; i < artists.length; i++) {
+          for (let i = 0; i < 1; i++) {
             self.artist.push({
               src: artists[i].picUrl,
               name: artists[i].name,
@@ -84,9 +83,8 @@
       )
       Axios.get("/search?keywords=" + self.result + "&type=10").then( //专辑
         function(res) {
-          console.log(res.data.result.albums)
           let album = res.data.result.albums;
-          for (let i = 0; i < album.length; i++) {
+          for (let i = 0; i < 8; i++) {
             self.box.push({
               src: album[i].picUrl,
               title: album[i].name,
@@ -160,7 +158,7 @@
     flex-grow: 5
   }
   .search-container .artist .artist-box {
-    height: 100px;
+    height: 120px;
     width: 100px;
     text-align: center;
     display: inline-block;
@@ -171,22 +169,26 @@
     margin-right: 20px;
     display: inline-block;
   }
-  .title {
-    margin-bottom: 20px;
-  }
   .search-container .artist .artist-box img {
     border-radius: 50%;
     margin-bottom: 5px;
+    height: 100px;
   }
   .search-container .album .album-box img {
-    margin-bottom: 5px;
+  height:100px;
   }
   .search-container .album .album-box .name {
     color: #3f3f3f
   }
   .search-container .artist .artist-box span,
-  .search-container .album .album-box span {
+  .search-container .album .album-box p {
     font-size: 14px;
+  }
+  .search-container .album .album-box .title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100px;
+    white-space: nowrap;
   }
   .song {
     margin-top: 30px;
@@ -199,6 +201,9 @@
     color: #7c7c7c;
     display: inline-block;
     font-size: 14px;
+  }
+  .title{
+    margin-bottom:10px;
   }
   .s {
     width: 5%;

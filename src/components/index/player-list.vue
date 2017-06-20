@@ -160,7 +160,7 @@
       getlist() {
         let self = this;
         self.$router.push({
-          path: "/playlist" 
+          path: "/playlist"
         })
       }
     },

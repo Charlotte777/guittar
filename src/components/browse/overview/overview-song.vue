@@ -4,7 +4,7 @@
       <span class="s">最新歌曲</span>
     </div>
     <div class="new-song">
-      <div class="song" v-for="(i, index) in song" @click="play(i.id,i.songName,i.songArtist,i.album,i.time)" :id="i.id">
+      <div class="song" v-for="(i, index) in song" @click="play(i.id,i.songName,i.songArtist,i.url)" :id="i.id">
         <div class="img">
           <span>{{ (index<9)? "0"+(index+1):(index+1) }}</span><img :src="i.img">
           <span class="opacity"></span>
@@ -41,7 +41,8 @@
               songArtist: "",
               id: arr[i].id,
               album: arr[i].song.album.name,
-              time: arr[i].song.duration
+              time: arr[i].song.duration,
+              url: arr[i].song.album.picUrl,
             });
             for (let n = 0; n < artists.length; n++) {
               self.song[i].songArtist += artists[n].name + (n != artists.length - 1 ? " / " : "");
@@ -51,16 +52,15 @@
       )
     },
     methods: {
-      play(id, song, artist, album, time) {
+      play(id, song, artist,url) {
         let self = this;
         self.$router.push({
-          path: '/playlist',
+          path: '/browse/overview',
           query: {
             id: id,
-            song: song,
-            artist: artist,
-            album: album,
-            time: time
+            songName: song,
+            songArtist: artist,
+            url:url
           }
         })
       }

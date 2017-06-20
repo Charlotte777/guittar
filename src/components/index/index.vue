@@ -23,7 +23,7 @@
         </ul>
         <div class="list-player">
           <div class="text">New playlist</div>
-          <div class="img"><img src="/static/images/lu.jpg"></div>
+          <div class="img"><img :src="src"></div>
         </div>
       </div>
       <center></center>
@@ -39,6 +39,7 @@
   export default {
     data() {
       return {
+        src: "/static/images/lu.jpg",
         songInfo: {
           title: '时差 (On Call)',
           singer: 'Lu Han',
@@ -50,9 +51,14 @@
     },
     beforeMount() {
       let self = this;
-      Axios.get('/music/url?id=347230').then(
+      let id = self.$route.query.id;
+      console.log(self)
+      Axios.get('/music/url?id=' + id).then(
         function(res) {
           self.songInfo.playerInfo.url = res.data.data[0].url;
+          self.songInfo.title = self.$route.query.songName;
+          self.songInfo.singer = self.$route.query.songArtist;
+          self.src = self.$route.query.url;
         }
       )
     },

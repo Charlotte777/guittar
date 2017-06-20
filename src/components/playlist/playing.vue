@@ -14,7 +14,7 @@
       </ul>
     </div>
     <div class="next-box">
-     <h3>接下来</h3>
+      <h3>接下来</h3>
       <ul class="next-list">
         <li class="th">
           <div class="s"></div>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+  import Axios from 'axios'
   import list from './list'
   export default {
     props: ["todo"],
@@ -41,87 +42,96 @@
           ablum: "÷ (Deluxe)",
           time: "4:20"
         }],
-        nextList:[{
+        nextList: [{
           title: "There For You",
           artist: "Martin Garrix",
           ablum: "There For You",
           time: "3:41"
-        },{
+        }, {
           title: "Homegrown",
           artist: "Haux",
           ablum: "Homegrown",
           time: "3:41"
-        },{
+        }, {
           title: "阿婆说",
           artist: "陈一发儿",
           ablum: "阿婆说",
           time: "4:06"
-        },{
+        }, {
           title: "Embody Me",
           artist: "Bathing Beach",
           ablum: "Novo Amor",
           time: "3:10"
-        },{
+        }, {
           title: "游园道",
           artist: "丛帅",
           ablum: "游园道",
           time: "3:41"
-        },{
+        }, {
           title: "阿婆说",
           artist: "陈一发儿",
           ablum: "阿婆说",
           time: "4:06"
-        },{
+        }, {
           title: "Homegrown",
           artist: "Haux",
           ablum: "Homegrown",
           time: "3:41"
-        },{
+        }, {
           title: "阿婆说",
           artist: "陈一发儿",
           ablum: "阿婆说",
           time: "4:06"
-        },{
+        }, {
           title: "There For You",
           artist: "Martin Garrix",
           ablum: "There For You",
           time: "3:41"
-        },{
+        }, {
           title: "游园道",
           artist: "丛帅",
           ablum: "游园道",
           time: "3:41"
-        },{
+        }, {
           title: "Embody Me",
           artist: "Bathing Beach",
           ablum: "Novo Amor",
           time: "3:10"
-        },{
+        }, {
           title: "游园道",
           artist: "丛帅",
           ablum: "游园道",
           time: "3:41"
-        },{
+        }, {
           title: "阿婆说",
           artist: "陈一发儿",
           ablum: "阿婆说",
           time: "4:06"
-        },{
+        }, {
           title: "Embody Me",
           artist: "Bathing Beach",
           ablum: "Novo Amor",
           time: "3:10"
-        },{
+        }, {
           title: "游园道",
           artist: "丛帅",
           ablum: "游园道",
           time: "3:41"
-        },{
+        }, {
           title: "阿婆说",
           artist: "陈一发儿",
           ablum: "阿婆说",
           time: "4:06"
         }]
+      }
+    },
+    beforeMount() {
+      let self = this;
+      let id = self.$route.query.id;
+      for (let i = 0; i < self.playingList.length; i++) {
+        self.playingList.push({
+          title
+        })
       }
     },
     components: {
@@ -132,9 +142,10 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.playing-box, .next-box{
-  margin-top:20px;
-}
+  .playing-box,
+  .next-box {
+    margin-top: 20px;
+  }
   .playing h3 {
     border-bottom: 2px solid #282828;
     color: #f3f3f3;
@@ -146,7 +157,8 @@
     border-bottom: 1px solid #282828;
     padding: 5px 0;
   }
-  .playing-list .th div, .next-list .th div {
+  .playing-list .th div,
+  .next-list .th div {
     color: #7c7c7c;
     display: inline-block;
     font-size: 14px;

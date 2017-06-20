@@ -4,7 +4,7 @@
       <span class="s">最新歌曲</span>
     </div>
     <div class="new-song">
-      <div class="song" v-for="(i, index) in song">
+      <div class="song" v-for="(i, index) in song" @click="play(i.id,i.songName,i.songArtist,i.album,i.time)" :id="i.id">
         <div class="img">
           <span>{{ (index<9)? "0"+(index+1):(index+1) }}</span><img :src="i.img">
           <span class="opacity"></span>
@@ -32,12 +32,16 @@
       Axios.get('/personalized/newsong').then(
         function(res) {
           let arr = res.data.result;
+          console.log(arr)
           for (let i = 0; i < arr.length; i++) {
             let artists = res.data.result[i].song.artists;
             self.song.push({
               songName: arr[i].name,
               img: arr[i].song.album.picUrl,
-              songArtist: ""
+              songArtist: "",
+              id: arr[i].id,
+              album: arr[i].song.album.name,
+              time: arr[i].song.duration
             });
             for (let n = 0; n < artists.length; n++) {
               self.song[i].songArtist += artists[n].name + (n != artists.length - 1 ? " / " : "");
@@ -45,6 +49,21 @@
           }
         }
       )
+    },
+    methods: {
+      play(id, song, artist, album, time) {
+        let self = this;
+        self.$router.push({
+          path: '/playlist',
+          query: {
+            id: id,
+            song: song,
+            artist: artist,
+            album: album,
+            time: time
+          }
+        })
+      }
     }
   }
 </script>

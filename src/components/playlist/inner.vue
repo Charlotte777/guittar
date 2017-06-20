@@ -17,6 +17,7 @@
 </template>
 
 <script>
+ 
   import playing from './playing'
   import playRecord from './play-record'
   export default {
@@ -48,9 +49,9 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.playLists .box{
-  padding:0 25px;
-}
+  .playLists .box {
+    padding: 0 25px;
+  }
   .playLists .banner {
     background: -moz-linear-gradient( top, #3f3f3f, #181818);
     background: -webkit-linear-gradient( top, #3f3f3f, #181818);

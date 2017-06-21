@@ -14,6 +14,7 @@ Vue.config.productionTip = false;
 const store = new Vuex.Store({
     state: {
         userInfo: "0",
+        songId: "0"
     },
     // mutations: {
     //     increment(state) {

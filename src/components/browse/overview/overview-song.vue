@@ -32,7 +32,6 @@
       Axios.get('/personalized/newsong').then(
         function(res) {
           let arr = res.data.result;
-          console.log(arr)
           for (let i = 0; i < arr.length; i++) {
             let artists = res.data.result[i].song.artists;
             self.song.push({

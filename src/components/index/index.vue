@@ -52,10 +52,10 @@
     beforeMount() {
       let self = this;
       let id = self.$route.query.id;
-      console.log(self)
       Axios.get('/music/url?id=' + id).then(
         function(res) {
           self.songInfo.playerInfo.url = res.data.data[0].url;
+          console.log(res.data.data[0].url)
           self.songInfo.title = self.$route.query.songName;
           self.songInfo.singer = self.$route.query.songArtist;
           self.src = self.$route.query.url;

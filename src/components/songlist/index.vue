@@ -5,7 +5,7 @@
       <div class="info">
         <h2>{{ i.title }}</h2>
         <h5 class="artist"><span>By</span>{{ i.artist }}</h5>
-        <h5><span class="s">简介:</span>{{ i.introduction }}</h5>
+        <h5 class="introduction"><span class="s">简介:</span>{{ i.introduction }}</h5>
         <h5><span>{{i.number}}</span>songs
           <guittar-button :todo="play"></guittar-button>
         </h5>
@@ -44,12 +44,12 @@
     beforeMount() {
       let self = this;
       let id = self.$route.params.lid;
-      Axios.get("/playlist/detail?id=" + id).then(
+      Axios.get("playlist/detail?id=" + id).then(
         function(res) {
           let header = res.data.playlist;
           let result = res.data.playlist.tracks;
           self.i.title = header.name;
-          self.i.src = header.picUrl;
+          self.i.src = header.coverImgUrl;
           self.i.introduction = header.description;
           self.i.number = header.trackCount;
           self.i.artist = header.creator.nickname;
@@ -58,7 +58,17 @@
               title: result[i].name,
               ablum: result[i].al.name,
               time: parseInt(result[i].dt / 1000 / 60) + ':' + parseInt(result[i].dt / 1000) % 60,
-              artist: result[i].ar[0].name
+              artist: result[i].ar[0].name,
+              id: result[i].id,
+              play(id) {
+                console.log(self)
+                self.$router.replace({
+                  path: '/browse/overview',
+                  query: {
+                    id: id
+                  }
+                })
+              }
             })
             for (let n = 1; n < result[i].ar.length; n++) {
               self.list[i].artist += '/' + result[i].ar[n].name;
@@ -78,9 +88,9 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.song-lists {
-  padding-top:50px;
-}
+  .song-lists {
+    padding-top: 50px;
+  }
   .song-lists .list-header {
     display: inline-flex;
     align-items: center;
@@ -103,6 +113,10 @@
   .song-lists .list-header .info h5 span {
     color: #ffffff;
     margin-right: 5px;
+  }
+  .song-lists .list-header .info .introduction {
+    height: 50px;
+    overflow: hidden
   }
   .song-lists .list-header .info .artist {
     cursor: pointer;

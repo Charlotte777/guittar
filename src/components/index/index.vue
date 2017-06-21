@@ -39,6 +39,7 @@
   export default {
     data() {
       return {
+        id: "",
         src: "/static/images/lu.jpg",
         songInfo: {
           title: '时差 (On Call)',
@@ -49,18 +50,24 @@
         }
       }
     },
-    beforeMount() {
-      let self = this;
-      let id = self.$route.query.id;
-      Axios.get('/music/url?id=' + id).then(
-        function(res) {
-          self.songInfo.playerInfo.url = res.data.data[0].url;
-          console.log(res.data.data[0].url)
-          self.songInfo.title = self.$route.query.songName;
-          self.songInfo.singer = self.$route.query.songArtist;
-          self.src = self.$route.query.url;
-        }
-      )
+    mounted() {
+      let self=this;
+      // console.log(self.$store.state)
+      // Axios.get('/music/url?id=' + id).then(
+      //   function(res) {
+      //     // self.songInfo.playerInfo.url = res.data.data[0].url;
+      //     // self.songInfo.title = self.$route.query.songName;
+      //     // self.songInfo.singer = self.$route.query.songArtist;
+      //     // self.src = self.$route.query.url;
+      //   }
+      // )
+    },
+    computed: {
+      getid() {
+        let self = this;
+        self.id = self.$store.state.songId;
+        return self.id
+      }
     },
     components: {
       Player,

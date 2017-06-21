@@ -101,9 +101,9 @@
       },
       changeProgress() {
         let self = this;
-        let duration = self.$refs.player.duration;
+        let durations = self.$refs.player.duration;
         let currentTime = self.$refs.player.currentTime;
-        let a = currentTime / duration;
+        let a = currentTime / durations;
         let result = a * 100 + '%';
         self.width = result;
         let m = parseInt(currentTime / 60);

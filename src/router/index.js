@@ -20,34 +20,36 @@ export default new Router({
         name: 'index',
         component: Index,
         children: [{
-            path: 'browse',
-            name: 'browse',
-            component: Browse.index,
-            children: [{
-                path: 'overview',
-                component: Browse.overview
+                path: 'browse',
+                name: 'browse',
+                component: Browse.index,
+                children: [{
+                    path: 'overview',
+                    component: Browse.overview
+                }, {
+                    path: 'charts',
+                    component: Browse.charts
+                }, {
+                    path: 'singer',
+                    component: Browse.singer
+                }, {
+                    path: 'new-releases',
+                    component: Browse.newReleases
+                }]
             }, {
-                path: 'charts',
-                component: Browse.charts
+                path: "/songlist/:lid",
+                name: 'songlist',
+                component: songList
             }, {
-                path: 'singer',
-                component: Browse.singer
+                path: "/playlist",
+                name: "playlist",
+                component: playList.index,
             }, {
-                path: 'new-releases',
-                component: Browse.newReleases
-            }]
-        }, {
-            path: "/songlist/:lid",
-            name: 'songlist',
-            component: songList
-        }, {
-            path: "/playlist",
-            name: "playlist",
-            component: playList.index,
-        }, {
-            path: "/find",
-            name: "find",
-            component: find,
-        }]
-    }]
+                path: "/find",
+                name: "find",
+                component: find,
+            },
+
+        ]
+    }, ]
 })

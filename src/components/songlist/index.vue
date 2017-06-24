@@ -61,8 +61,8 @@
               artist: result[i].ar[0].name,
               id: result[i].id,
               play(id) {
-                console.log(self.$store)
-                self.$store.state.songId = id;
+                self.$store.state.songId=id;
+                self.$store.commit("getId",id)
               }
             })
             for (let n = 1; n < result[i].ar.length; n++) {
@@ -83,37 +83,37 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-   .song-lists {
-     padding-top: 50px;
-   }
-   .song-lists .list-header {
-     display: inline-flex;
-     align-items: center;
-     margin: 10px 20px
-   }
-   .song-lists .list-header .cover {}
-   .song-lists .list-header .cover img {
-     width: 200px;
-     height: 200px
-   }
-   .song-lists .list-header .info {
-     padding: 0 20px;
-   }
-   .song-lists .list-header .info h5 {
-     color: #828385;
-     font-weight: normal;
-     line-height: 24px;
-     max-width: 700px;
-   }
-   .song-lists .list-header .info h5 span {
-     color: #ffffff;
-     margin-right: 5px;
-   }
-   .song-lists .list-header .info .introduction {
-     height: 50px;
-     overflow: hidden;
-   }
-   .song-lists .list-header .info .artist {
-     cursor: pointer;
-   }
+  .song-lists {
+    padding-top: 50px;
+  }
+  .song-lists .list-header {
+    display: inline-flex;
+    align-items: center;
+    margin: 10px 20px
+  }
+  .song-lists .list-header .cover {}
+  .song-lists .list-header .cover img {
+    width: 200px;
+    height: 200px
+  }
+  .song-lists .list-header .info {
+    padding: 0 20px;
+  }
+  .song-lists .list-header .info h5 {
+    color: #828385;
+    font-weight: normal;
+    line-height: 24px;
+    max-width: 700px;
+  }
+  .song-lists .list-header .info h5 span {
+    color: #ffffff;
+    margin-right: 5px;
+  }
+  .song-lists .list-header .info .introduction {
+    height: 50px;
+    overflow: hidden;
+  }
+  .song-lists .list-header .info .artist {
+    cursor: pointer;
+  }
 </style>

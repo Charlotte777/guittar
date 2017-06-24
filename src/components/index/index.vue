@@ -36,6 +36,7 @@
   import Player from './player'
   import Center from './center'
   import Axios from 'axios'
+  import Bus from '@/assets/eventBus'
   export default {
     data() {
       return {
@@ -51,23 +52,29 @@
       }
     },
     mounted() {
-      let self=this;
-      // console.log(self.$store.state)
-      // Axios.get('/music/url?id=' + id).then(
-      //   function(res) {
-      //     // self.songInfo.playerInfo.url = res.data.data[0].url;
-      //     // self.songInfo.title = self.$route.query.songName;
-      //     // self.songInfo.singer = self.$route.query.songArtist;
-      //     // self.src = self.$route.query.url;
-      //   }
-      // )
-    },
-    computed: {
-      getid() {
-        let self = this;
+      let self = this;
+      Bus.$on('change-song', function(r) {
         self.id = self.$store.state.songId;
-        return self.id
-      }
+        Axios.get('/music/url?id=' + self.id).then(
+          function(res) {
+            self.songInfo.playerInfo.url = res.data.data[0].url;
+            Axios.get('/song/detail?ids=' + self.id).then(function(results) {
+              for (let i = 0; i < results.songs.length; i++) {
+                console.log(results.songs[i])
+              }
+            })
+          }
+        )
+      });
+      // console.log(self.$store.state)
+      // if (id != "") {
+      //   Axios.get('/music/url?id=' + id).then(
+      //     function(res) {
+      //       console.log(res)
+      //       self.songInfo.playerInfo.url = res.data.data[0].url;
+      //     }
+      //   )
+      // }
     },
     components: {
       Player,

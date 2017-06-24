@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 import App from './App'
 import Router from './router'
 import Dialog from 'hsy-vue-dialog'
+import Bus from '@/assets/eventBus'
 
 Vue.use(Vuex);
 Vue.use(Router);
@@ -14,13 +15,14 @@ Vue.config.productionTip = false;
 const store = new Vuex.Store({
     state: {
         userInfo: "0",
-        songId: "0"
+        songId: ""
     },
-    // mutations: {
-    //     increment(state) {
-    //         state.count++
-    //     }
-    // }
+    mutations: {
+        getId(state, id) {
+            state.songId = id;
+            Bus.$emit('change-song');
+        }
+    }
 })
 
 /* eslint-disable no-new */

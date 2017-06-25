@@ -41,7 +41,7 @@
     data() {
       return {
         id: "",
-        src: "/static/images/lu.jpg",
+        src: "",
         songInfo: {
           title: '时差 (On Call)',
           singer: 'Lu Han',
@@ -59,8 +59,12 @@
           function(res) {
             self.songInfo.playerInfo.url = res.data.data[0].url;
             Axios.get('/song/detail?ids=' + self.id).then(function(results) {
-              for (let i = 0; i < results.songs.length; i++) {
-                console.log(results.songs[i])
+              let songs=results.data.songs;
+              for(let i =0;i<=songs.length;i++){
+                self.songInfo.title=songs[i].name;
+                self.songInfo.singer=songs[i].ar[0].name;
+                self.src=songs[i].al.picUrl;
+
               }
             })
           }
@@ -132,7 +136,6 @@
   .guittar .guittar-content .list .playlists {
     margin-top: 40px;
   }
-  .guittar .guittar-content .list>ul>li {}
   .guittar .guittar-content .list>ul>li .title {
     font-size: 12px;
     letter-spacing: 1.5px;

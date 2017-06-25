@@ -21,6 +21,7 @@ const store = new Vuex.Store({
         getId(state, id) {
             state.songId = id;
             Bus.$emit('change-song');
+            
         }
     }
 })

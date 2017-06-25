@@ -4,7 +4,7 @@
       <span class="s">最新歌曲</span>
     </div>
     <div class="new-song">
-      <div class="song" v-for="(i, index) in song" @click="play(i.id,i.songName,i.songArtist,i.url)" :id="i.id">
+      <div class="song" v-for="(i, index) in song" @click="play(i.id)" :id="i.id">
         <div class="img">
           <span>{{ (index<9)? "0"+(index+1):(index+1) }}</span><img :src="i.img">
           <span class="opacity"></span>
@@ -20,6 +20,7 @@
 
 <script>
   import Axios from 'axios'
+  import Bus from '@/assets/eventBus'
   export default {
     props: ["todo"],
     data() {
@@ -51,17 +52,10 @@
       )
     },
     methods: {
-      play(id, song, artist,url) {
-        let self = this;
-        self.$router.push({
-          path: '/browse/overview',
-          query: {
-            id: id,
-            songName: song,
-            songArtist: artist,
-            url:url
-          }
-        })
+      play(id){
+        let self=this;
+        self.$store.state.songId=id;
+        self.$store.commit("getId",id)
       }
     }
   }

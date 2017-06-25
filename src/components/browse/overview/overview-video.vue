@@ -3,7 +3,7 @@
     <div class="title">
       <span class="s">主播电台</span>
     </div>
-    <div class="anchor-station" v-for="i in video">
+    <div class="anchor-station" @click="play(i.id)" v-for="i in video" :id="i.id">
       <div class="station">
         <div class="img"><img :src="i.img"></div>
       <div class="text">
@@ -32,13 +32,14 @@ import Axios from 'axios'
               self.video.push({
                 title:arr[i].name,
                 img:arr[i].picUrl,
-                info:arr[i].program.dj.brand
-
+                info:arr[i].program.dj.brand,
+                id:arr[i].id,
               })
             }
           }
         )
-      }
+      },
+     
     
   }
 </script>

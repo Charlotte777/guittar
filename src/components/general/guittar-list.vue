@@ -1,5 +1,5 @@
 <template>
-    <div class="playlist">
+    <div class="playlist" :id="todo.id" @click="jumpList(todo.id)">
         <div class="s" :style="{background: 'url(' + todo.img + ')'}">
             <ul class="opacity">
                 <li class="add"></li>
@@ -16,8 +16,17 @@
 
 <script>
     export default {
-        props: ["todo"]
+        props: ["todo"],
+        methods:{
+            jumpList(id){
+                console.log(this.$router)
+                 this.$router.push({
+          path: "/songlist/" + id,
+        });
+            }
     }
+    }
+    
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

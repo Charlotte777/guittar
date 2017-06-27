@@ -33,9 +33,8 @@
               img:res.data.result.coverImgUrl,
               id:res.data.result.id  ,
                jumpList(id){
-        let self=this;
-        console.log(id)
-      }
+                let self=this;
+              }
             });       
              }
         )

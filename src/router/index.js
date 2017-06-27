@@ -44,7 +44,7 @@ export default new Router({
                 path: "/playlist",
                 name: "playlist",
                 component: playList.index,
-            }, {
+            },  {
                 path: "/find",
                 name: "find",
                 component: find,

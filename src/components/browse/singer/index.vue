@@ -4,14 +4,14 @@
       <span class="s">Featured Charts</span>
     </div>
     <div class="list">
-      <guittar-list v-for="i in list" :todo="i" :key="i.title"></guittar-list>
+      <guittar-singer v-for="i in list" :todo="i" :key="i.title"></guittar-singer>
     </div>
   </div>
 </template>
 
 <script>
   import Axios from 'axios'
-  import guittarList from '../../general/guittar-list'
+  import guittarSinger from '../../general/guittar-singger'
   export default {
     data() {
       return {
@@ -19,18 +19,18 @@
       }
     },
     components: {
-      guittarList
+      guittarSinger
     },
     beforeMount() {
       let self = this;
       Axios.get('/top/artists?offset=0&limit=30').then(
         function(res) {
-          console.log(res)
           let result = res.data.artists;
           for (let i = 0; i <= result.length; i++) {
             self.list.push({
               title : result[i].name,
-              img : result[i].img1v1Url
+              img : result[i].img1v1Url,
+              id:result[i].id,
             })
           }
         }

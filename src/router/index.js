@@ -25,15 +25,19 @@ export default new Router({
                 component: Browse.index,
                 children: [{
                     path: 'overview',
+                    name:"overview",
                     component: Browse.overview
                 }, {
                     path: 'charts',
+                    name:"charts",
                     component: Browse.charts
                 }, {
                     path: 'singer',
+                    name:"singer",
                     component: Browse.singer
                 }, {
                     path: 'new-releases',
+                    name:"new-releases",
                     component: Browse.newReleases
                 }]
             }, {

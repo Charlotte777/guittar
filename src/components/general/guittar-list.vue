@@ -20,8 +20,8 @@
         methods:{
             jumpList(id){
                  this.$router.push({
-          path: "/songlist/" + id,
-        });
+                path: "/songlist/" + id,
+                });
             }
     }
     }

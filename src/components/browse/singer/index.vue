@@ -4,14 +4,14 @@
       <span class="s">Featured Charts</span>
     </div>
     <div class="list">
-      <guittar-singer v-for="i in list" :todo="i" :key="i.title"></guittar-singer>
+      <guittar-list v-for="i in list" :todo="i" :key="i.title"></guittar-list>
     </div>
   </div>
 </template>
 
 <script>
   import Axios from 'axios'
-  import guittarSinger from '../../general/guittar-singger'
+  import guittarlist from '../../general/guittar-list'
   export default {
     data() {
       return {
@@ -19,7 +19,7 @@
       }
     },
     components: {
-      guittarSinger
+      guittarlist
     },
     beforeMount() {
       let self = this;

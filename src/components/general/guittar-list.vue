@@ -1,5 +1,5 @@
 <template>
-    <div class="playlist" :id="todo.id" @click="jumpList(todo.id)">
+    <div class="playlist" :id="todo.id" @click="todo.jumpList(todo.id)">
         <div class="s" :style="{background: 'url(' + todo.img + ')'}">
             <ul class="opacity">
                 <li class="add"></li>
@@ -18,11 +18,6 @@
     export default {
         props: ["todo"],
         methods:{
-            jumpList(id){
-                 this.$router.push({
-                path: "/songlist/" + id,
-                });
-            }
     }
     }
     

@@ -27,6 +27,7 @@
             self.list.push({
               img: result[i].song.album.picUrl,
               title: result[i].name,
+              id:result[i].id,
               artist: (function() { 
                 let artist = result[i].song.album.artists;
                 let arr = [];
@@ -34,7 +35,11 @@
                   arr.push(artist[n].name);
                 }
                 return arr.toString()
-              })()
+              })(),
+              jumpList(id) {
+               self.$store.state.songId=id;
+              self.$store.commit("getId",id)
+              }
             });
           }
         }

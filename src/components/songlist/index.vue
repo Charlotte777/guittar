@@ -91,7 +91,6 @@
     align-items: center;
     margin: 10px 20px
   }
-  .song-lists .list-header .cover {}
   .song-lists .list-header .cover img {
     width: 200px;
     height: 200px

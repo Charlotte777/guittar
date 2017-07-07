@@ -1,6 +1,6 @@
 <template>
     <div class="playlist" :id="todo.id" @click="todo.jumpList(todo.id)">
-        <div class="s" :style="{background: 'url(' + todo.img + ')'}">
+        <div class="s" :style="{background: 'url(' + todo.img + ')'}" style="background-repeat: no-repeat;background-position: center center;background-size:100% 100%;">
             <ul class="opacity">
                 <li class="add"></li>
                 <li class="play"></li>
@@ -32,9 +32,8 @@
         width: 18%;
     }
     .playlist .s {
-        height: 300px;
-        width: 100%;
-        background-position: center center;
+        height: 200px;
+        width: 100%
     }
     .playlist:nth-child(5n+0) {
         margin-right: 0;

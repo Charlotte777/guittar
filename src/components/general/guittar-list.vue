@@ -1,6 +1,6 @@
 <template>
     <div class="playlist" :id="todo.id" @click="todo.jumpList(todo.id)">
-        <div class="s" :style="{background: 'url(' + todo.img + ')'}" style="background-repeat: no-repeat;background-position: center center;background-size:100% 100%;">
+        <div class="s" :style="{background: 'url(' + todo.img + ')'}" style="background-position:center center;background-size:100% 100%;background-repeat: no-repeat">
             <ul class="opacity">
                 <li class="add"></li>
                 <li class="play"></li>

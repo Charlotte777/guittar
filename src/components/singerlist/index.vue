@@ -13,7 +13,7 @@
      <div class="singer-box">
        <div class="title">
          <ul>
-           <li v-for="i in list" :id="i.id" @click="jumpto(i.id)">
+           <li v-for="i in list" :id="i.id" @click="jumpto(i.id)" :class="{active:i.id==now}">
              <span class="content">{{i.content}}</span>
               <span class="slider"></span>
            </li>
@@ -107,7 +107,13 @@ jumpto(id){
     height: 2px;
     width: 30px;
     display: inline-block;
-    opacity: 1;
+    opacity: 0;
     margin: auto;
 }
+.singer-box .title ul li.active{
+  color:#828282
+}
+.singer-box .title ul li.active .slider {
+    opacity: 1;
+  }
 </style>

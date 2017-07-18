@@ -38,9 +38,6 @@ export default{
       },{
         id:"singer-info",
         content:"歌手详情"
-      },{
-        id:"same-singer",
-        content:"相似歌手"
       }],
       now:"album"
     }

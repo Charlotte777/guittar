@@ -5,23 +5,31 @@
 </template>
 
 <script>
-import guittarList from '../general/guittar-list'
-export default{
-data(){
-  return{
-    list:[{
-      img:"static/images/lu.jpg",
-      title:"xu",
-      name:"da"
-    }]
+  import Axios from 'axios'
+  import guittarList from '../general/guittar-list'
+  export default {
+    data() {
+      return {
+        list: [{
+          
+        }]
+      }
+    },
+    beforeMount(){
+      let self=this;
+       Axios.get('/simi/artist?id=6452').then(
+        function(res){
+          console.log(res)
+        }
+       )
+    },
+    component: {
+      guittarList
+    }
   }
-},
-  component:{
-    guittarList
-  }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 </style>

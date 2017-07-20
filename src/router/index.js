@@ -46,7 +46,7 @@ export default new Router({
                 name: 'songlist',
                 component: songList
             }, {
-                path: "/singerlist",
+                path: "/singerlist/:sid",
                 name: 'singerlist',
                 component: singerList
             }, {

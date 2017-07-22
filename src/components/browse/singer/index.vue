@@ -32,7 +32,6 @@
               img: result[i].img1v1Url,
               id: result[i].id,
               jumpList(id){
-                console.log(id)
                 self.$router.push({  
                 path: "/singerlist/" + id,})
               }

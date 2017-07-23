@@ -21,28 +21,21 @@
     props: ["todo"],
     data() {
       return {
-        Top50: [{
-          title: "Happier",
-          artist: "Ed Sheeran",
-          ablum: "÷ (Deluxe)",
-          time: "4:20"
-        }, {
-          title: "There For You",
-          artist: "Martin Garrix",
-          ablum: "There For You",
-          time: "3:41"
-        }, {
-          title: "Homegrown",
-          artist: "Haux",
-          ablum: "Homegrown",
-          time: "3:41"
-        }],
+        Top50: [],
       }
     },
     beforeMount() {
-      Axios.get("/artist/album?id=6452&limit=30").then(
+      let self = this;
+      let id = self.$route.params.sid;
+      let number = 30;
+      Axios.get("/artist/album?" + id + "=6452&limit=" + number).then(
         function(res) {
-          console.log(res)
+          console.log(res.data.hotAlbums)
+          let hotSong = res.data.hotAlbums;
+          for (let i = 0; i <= number; i++) {
+            self.Top50.push({
+            })
+          }
         }
       )
     },

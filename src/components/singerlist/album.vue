@@ -27,12 +27,11 @@
     beforeMount() {
       let self = this;
       let id = self.$route.params.sid;
-      let number = 30;
-      Axios.get("/artist/album?" + id + "=6452&limit=" + number).then(
+      Axios.get("/artist/album?" + id + "=6452&limit=30").then(
         function(res) {
-          console.log(res.data.hotAlbums)
-          let hotSong = res.data.hotAlbums;
+          console.log(res)
           for (let i = 0; i <= number; i++) {
+            console.log(i)
             self.Top50.push({
             })
           }

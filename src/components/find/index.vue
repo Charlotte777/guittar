@@ -59,11 +59,17 @@
         for (let i = 0; i < songs.length; i++) {
           let time = songs[i].bMusic.playTime;
           let artists = songs[i].artists;
+          console.log(res)
           self.songlist.push({
             title: songs[i].name,
             album: songs[i].album.name,
             artist: songs[i].artists[0].name,
+            id: songs[i].id,
             time: parseInt(time / 1000 / 60) + ":" + (parseInt(time / 1000 % 60) < 10 ? "0" + parseInt(time / 1000 % 60) : parseInt(time / 1000 % 60)),
+            play(id) {
+              self.$store.state.songId = id;
+              self.$store.commit("getId", id)
+            }
           })
           for (let n = 1; n < artists.length; n++) {
             self.songlist[i].artist += " / " + songs[i].artists[n].name
@@ -175,7 +181,7 @@
     height: 100px;
   }
   .search-container .album .album-box img {
-  height:100px;
+    height: 100px;
   }
   .search-container .album .album-box .name {
     color: #3f3f3f
@@ -202,8 +208,8 @@
     display: inline-block;
     font-size: 14px;
   }
-  .title{
-    margin-bottom:10px;
+  .title {
+    margin-bottom: 10px;
   }
   .s {
     width: 5%;

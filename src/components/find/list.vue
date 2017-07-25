@@ -1,5 +1,5 @@
 <template>
-  <li class="td">
+  <li class="td" :id="todo.id" @click="todo.play(todo.id)">
     <div class="s"><i class="fa fa-play-circle-o"></i></div>
     <div class="th-title">{{ todo.title }}</div>
     <div class="th-artist">{{ todo.artist }}</div>

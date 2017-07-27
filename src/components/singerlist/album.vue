@@ -30,11 +30,6 @@
       Axios.get("/artist/album?" + id + "=6452&limit=30").then(
         function(res) {
           console.log(res)
-          for (let i = 0; i <= number; i++) {
-            console.log(i)
-            self.Top50.push({
-            })
-          }
         }
       )
     },

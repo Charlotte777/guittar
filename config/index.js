@@ -36,7 +36,7 @@ module.exports = {
             '/lyric/': 'http://localhost:3000/',
             '/comment/': 'http://localhost:3000/',
             '/album/': 'http://localhost:3000/',
-            '/artists/': 'http://localhost:3000/',
+            '/artist/': 'http://localhost:3000/',
             '/artist_album/': 'http://localhost:3000/',
             '/personal_fm/': 'http://localhost:3000/',
             '/daily_signin/': 'http://localhost:3000/',
@@ -51,7 +51,7 @@ module.exports = {
             '/personalized': 'http://localhost:3000/',
             '/search': 'http://localhost:3000/',
             '/simi': 'http://localhost:3000/',
-            '/artist': 'http://localhost:3000/',
+            
         },
         // CSS Sourcemaps off by default because relative paths are "buggy"
         // with this option, according to the CSS-Loader README

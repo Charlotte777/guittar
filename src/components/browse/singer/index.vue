@@ -25,7 +25,6 @@
       let self = this;
       Axios.get('/top/artists?offset=0&limit=30').then(
         function(res) {
-          console.log(res)
           let result = res.data.artists;
           for (let i = 0; i < result.length; i++) {
             

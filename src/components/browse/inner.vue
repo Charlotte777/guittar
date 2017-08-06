@@ -32,6 +32,7 @@
 </template>
 
 <script>
+    import Axios from 'axios'
     import overview from './overview'
     import charts from './charts'
     import newReleases from './new-releases'
@@ -86,6 +87,13 @@
             overview,
             charts,
             newReleases
+        },
+        beforeMount(){
+            Axios.get('/banner').then(
+                function(res){
+                    console.log(res)
+                }
+            )
         }
     }
 </script>

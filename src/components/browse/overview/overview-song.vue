@@ -4,7 +4,7 @@
       <span class="s">最新歌曲</span>
     </div>
     <div class="new-song">
-      <div class="song" v-for="(i, index) in song" @click="play(i.id)" :id="i.id">
+      <div class="song" v-for="(i, index) in song" @click="play(i.id)" :id="i.id" ref="song" @mousedown="showMenu($event)">
         <div class="img">
           <span>{{ (index<9)? "0"+(index+1):(index+1) }}</span><img :src="i.img">
           <span class="opacity"></span>
@@ -25,7 +25,24 @@
     props: ["todo"],
     data() {
       return {
-        song: []
+        song: [],
+        mMove(ev) {
+          ev = ev || window.event;
+          let mousePos = self.mCoords(ev); // xֵ  mousePos.x;   yֵ  mousePos.y;
+          return mousePos;
+        },
+        mCoords(ev) {
+          if (ev.pageX || ev.pageY) {
+            return {
+              x: ev.pageX,
+              y: ev.pageY
+            };
+          }
+          return {
+            x: ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+            y: ev.clientY + document.body.scrollTop - document.body.clientTop
+          };
+        }
       }
     },
     beforeMount() {
@@ -52,11 +69,17 @@
       )
     },
     methods: {
-      play(id){
-        let self=this;
-        self.$store.state.songId=id;
-        self.$store.commit("getId",id)
-      }
+      play(id) {
+        let self = this;
+        self.$store.state.songId = id;
+        self.$store.commit("getId", id)
+      },
+      showMenu(e) {
+        console.log(e)
+        // let self = this;
+        // var rightedge = self.$ref.song.clientWidth - e.clientX;
+        // console.log(rightedge)
+      },
     }
   }
 </script>

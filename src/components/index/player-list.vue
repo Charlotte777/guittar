@@ -14,7 +14,7 @@
         <div class="time start">
           <p>{{ nowTime }}</p>
         </div>
-        <div ref="progress" class="progress-bar" @mousedown="transfer($event)">
+        <div ref="progress" class="progress-bar" @mousedown="transfer($event)" @click="a()">
           <div class="now" :style="{width}"></div>
         </div>
         <div class="time end">
@@ -121,6 +121,7 @@
         clearInterval(self.progress);
       },
       transfer(event) {
+        console.log(event)
         let self = this;
         function draging(ev) {
           let barLeft = self.$refs.progress.offsetLeft;
@@ -162,6 +163,9 @@
         self.$router.push({
           path: "/playlist"
         })
+      },
+      a(){
+        console.log("s")
       }
     },
     mounted() {

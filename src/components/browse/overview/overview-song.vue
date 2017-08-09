@@ -4,7 +4,21 @@
       <span class="s">最新歌曲</span>
     </div>
     <div class="new-song">
-      <div class="song" v-for="(i, index) in song" @click="play(i.id)" :id="i.id" ref="song" @mousedown="showMenu($event)">
+      <div class="showMenu" :style="{display:menuDisplay,top:menutop,left:menuleft}" ref="showMenu">
+        <div class="menuitems">
+          <span>1</span>
+        </div>
+        <div class="menuitems">
+          <span>2</span>
+        </div>
+        <div class="menuitems">
+          <span>3</span>
+        </div>
+        <div class="menuitems">
+          <span>4</span>
+        </div>
+      </div>
+      <div class="song" v-for="(i, index) in song" @click="play(i.id)" :id="i.id" ref="song" @contextmenu="showMenu($event)">
         <div class="img">
           <span>{{ (index<9)? "0"+(index+1):(index+1) }}</span><img :src="i.img">
           <span class="opacity"></span>
@@ -25,6 +39,9 @@
     props: ["todo"],
     data() {
       return {
+        menuDisplay: "none",
+        menutop:"",
+        menuleft:"",
         song: [],
         mMove(ev) {
           ev = ev || window.event;
@@ -72,10 +89,16 @@
       play(id) {
         let self = this;
         self.$store.state.songId = id;
-        self.$store.commit("getId", id)
+        self.$store.commit("getId", id);
+        self.display="none"
       },
       showMenu(e) {
-        console.log(e)
+        let self = this;
+        let rightedge = e.clientX;
+        let leftedge = e.clientY;
+        let menu=self.$refs.showMenu;
+        self.display = "block";
+        return false;
         // let self = this;
         // var rightedge = self.$ref.song.clientWidth - e.clientX;
         // console.log(rightedge)
@@ -95,6 +118,10 @@
   }
   .overview-song .new-song .song {
     display: inline-flex;
+  }
+  .overview-song .new-song .showMenu {
+    border: 1px solid #ff0000;
+    width: 205px;
   }
   .overview-song .new-song .opacity {
     position: absolute;

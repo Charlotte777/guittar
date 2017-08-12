@@ -1,24 +1,24 @@
 <template>
-  <div class="overview-song">
+  <div class="overview-song" ref="songs">
     <div class="title">
       <span class="s">最新歌曲</span>
     </div>
     <div class="new-song">
-      <div class="showMenu" :style="{display:menuDisplay,top:menutop,left:menuleft}" ref="showMenu">
+      <div class="showMenu" id="showMenu" :style="{display:menuDisplay,top:menutop,left:menuleft}" ref="showMenu">
         <div class="menuitems">
-          <span>1</span>
+          <span>播放</span>
         </div>
         <div class="menuitems">
-          <span>2</span>
+          <span>下一首播放</span>
         </div>
         <div class="menuitems">
-          <span>3</span>
+          <span>复制连接</span>
         </div>
         <div class="menuitems">
-          <span>4</span>
+          <span>下载</span>
         </div>
       </div>
-      <div class="song" v-for="(i, index) in song" @click="play(i.id)" :id="i.id" ref="song" @contextmenu="showMenu($event)">
+      <div class="song" v-for="(i, index) in song" @click="play(i.id)" :id="i.id" ref="song" @contextmenu="showMenu($event)" contextmenu="showMenu">
         <div class="img">
           <span>{{ (index<9)? "0"+(index+1):(index+1) }}</span><img :src="i.img">
           <span class="opacity"></span>
@@ -40,26 +40,9 @@
     data() {
       return {
         menuDisplay: "none",
-        menutop:"",
-        menuleft:"",
+        menutop: "",
+        menuleft: "",
         song: [],
-        mMove(ev) {
-          ev = ev || window.event;
-          let mousePos = self.mCoords(ev); // xֵ  mousePos.x;   yֵ  mousePos.y;
-          return mousePos;
-        },
-        mCoords(ev) {
-          if (ev.pageX || ev.pageY) {
-            return {
-              x: ev.pageX,
-              y: ev.pageY
-            };
-          }
-          return {
-            x: ev.clientX + document.body.scrollLeft - document.body.clientLeft,
-            y: ev.clientY + document.body.scrollTop - document.body.clientTop
-          };
-        }
       }
     },
     beforeMount() {
@@ -90,18 +73,19 @@
         let self = this;
         self.$store.state.songId = id;
         self.$store.commit("getId", id);
-        self.display="none"
+        self.display = "none"
       },
       showMenu(e) {
         let self = this;
-        let rightedge = e.clientX;
-        let leftedge = e.clientY;
-        let menu=self.$refs.showMenu;
-        self.display = "block";
+        let bodyWeight = document.body.clientWidth;
+        let songsWeight = self.$refs.songs.clientWidth;
+        let navWeight = bodyWeight - songsWeight;
+        self.menuDisplay = "block";
+        self.menuleft = e.screenX - navWeight + 50 + "px";
+        self.menutop = e.layerY + "px";
         return false;
         // let self = this;
         // var rightedge = self.$ref.song.clientWidth - e.clientX;
-        // console.log(rightedge)
       },
     }
   }
@@ -116,12 +100,16 @@
   .title {
     font-size: 18px
   }
+  .overview-song .new-song {
+    position: relative
+  }
   .overview-song .new-song .song {
     display: inline-flex;
   }
   .overview-song .new-song .showMenu {
     border: 1px solid #ff0000;
     width: 205px;
+    position: absolute
   }
   .overview-song .new-song .opacity {
     position: absolute;

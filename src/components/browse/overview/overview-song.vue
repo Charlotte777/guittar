@@ -5,17 +5,17 @@
     </div>
     <div class="new-song">
       <div class="showMenu" id="showMenu" :style="{display:menuDisplay,top:menutop,left:menuleft}" ref="showMenu">
-        <div class="menuitems">
-          <span>播放</span>
+        <div class="menuitems ">
+          <span><i class="fa fa-play-circle-o"></i>播放</span>
         </div>
         <div class="menuitems">
-          <span>下一首播放</span>
+          <span><i class="fa fa-plus-square"></i>下一首播放</span>
         </div>
         <div class="menuitems">
-          <span>复制连接</span>
+          <span><i class="fa fa-link"></i>复制连接</span>
         </div>
         <div class="menuitems">
-          <span>下载</span>
+          <span><i class="fa fa-download"></i>下载</span>
         </div>
       </div>
       <div class="song" v-for="(i, index) in song" @click="play(i.id)" :id="i.id" ref="song" @contextmenu="showMenu($event)" contextmenu="showMenu">
@@ -73,7 +73,7 @@
         let self = this;
         self.$store.state.songId = id;
         self.$store.commit("getId", id);
-        self.display = "none"
+        self.menuDisplay = "none";
       },
       showMenu(e) {
         let self = this;
@@ -107,9 +107,21 @@
     display: inline-flex;
   }
   .overview-song .new-song .showMenu {
-    border: 1px solid #ff0000;
-    width: 205px;
-    position: absolute
+    width: 180px;
+    position: absolute;
+    padding: 5px 0;
+    background: #302F33;
+  }
+  .overview-song .new-song .showMenu .menuitems {
+    cursor: pointer;
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+  .overview-song .new-song .showMenu i{
+    margin-right:5px;
+  }
+  .overview-song .new-song .showMenu .menuitems:hover {
+    background:#3B3A3D
   }
   .overview-song .new-song .opacity {
     position: absolute;

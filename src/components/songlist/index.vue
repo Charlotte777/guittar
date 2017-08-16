@@ -11,7 +11,22 @@
         </h5>
       </div>
     </div>
+    <div class="showMenu" id="showMenu" :style="{display:menuDisplay,top:menutop,left:menuleft}" ref="showMenu">
+      <div class="menuitems ">
+        <span><i class="fa fa-play-circle-o"></i>播放</span>
+      </div>
+      <div class="menuitems">
+        <span><i class="fa fa-plus-square"></i>下一首播放</span>
+      </div>
+      <div class="menuitems">
+        <span><i class="fa fa-link"></i>复制连接</span>
+      </div>
+      <div class="menuitems">
+        <span><i class="fa fa-download"></i>下载</span>
+      </div>
+    </div>
     <lists :todo="list"></lists>
+    
   </div>
 </template>
 
@@ -35,7 +50,10 @@
           click() {},
           width: 80
         },
-        list: []
+        list: [],
+        menuDisplay: "none",
+        menutop: "",
+        menuleft: ""
       }
     },
     mounted() {
@@ -61,8 +79,14 @@
               artist: result[i].ar[0].name,
               id: result[i].id,
               play(id) {
-                self.$store.state.songId=id;
-                self.$store.commit("getId",id)
+                self.$store.state.songId = id;
+                self.$store.commit("getId", id)
+              },
+              showMenu(e) {
+                self.menuDisplay = "block";
+                self.menuleft = e.clientX+"px";  
+                self.menutop=e.clientY+"px";
+                console.log(e)
               }
             })
             for (let n = 1; n < result[i].ar.length; n++) {
@@ -72,7 +96,7 @@
             }
           }
         }
-      )
+      );
     },
     components: {
       guittarButton,
@@ -114,5 +138,24 @@
   }
   .song-lists .list-header .info .artist {
     cursor: pointer;
+  }
+  .song-lists .showMenu {
+    width: 180px;
+    padding: 5px 0;
+    background: #302F33;
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.24);
+    z-index: 999;
+    position:absolute;
+  }
+  .showMenu .menuitems {
+    cursor: pointer;
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+  .showMenu i {
+    margin-right: 5px;
+  }
+  .showMenu .menuitems:hover {
+    background: #3B3A3D
   }
 </style>

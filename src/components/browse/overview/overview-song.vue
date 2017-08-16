@@ -18,7 +18,7 @@
           <span><i class="fa fa-download"></i>下载</span>
         </div>
       </div>
-      <div class="song" v-for="(i, index) in song" @click="play(i.id)" :id="i.id" ref="song" @contextmenu="showMenu($event)" contextmenu="showMenu">
+      <div class="song" v-for="(i, index) in song" @dblclick="play(i.id)" :id="i.id" ref="song" @contextmenu="showMenu($event)" contextmenu="showMenu">
         <div class="img">
           <span>{{ (index<9)? "0"+(index+1):(index+1) }}</span><img :src="i.img">
           <span class="opacity"></span>
@@ -111,17 +111,19 @@
     position: absolute;
     padding: 5px 0;
     background: #302F33;
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.24);
+    z-index:999
   }
   .overview-song .new-song .showMenu .menuitems {
     cursor: pointer;
     padding: 10px 15px;
     font-size: 14px;
   }
-  .overview-song .new-song .showMenu i{
-    margin-right:5px;
+  .overview-song .new-song .showMenu i {
+    margin-right: 5px;
   }
   .overview-song .new-song .showMenu .menuitems:hover {
-    background:#3B3A3D
+    background: #3B3A3D
   }
   .overview-song .new-song .opacity {
     position: absolute;

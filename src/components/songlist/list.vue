@@ -1,5 +1,5 @@
 <template>
-  <li class="td" :id="todo.id" @click="todo.play(todo.id)">
+  <li class="td" :id="todo.id" @click="todo.play(todo.id)" @contextmenu="todo.showMenu($event)">
     <div class="s"><i class="fa fa-play-circle-o"></i></div>
     <div class="th-title">{{ todo.title }}</div>
     <div class="th-artist">{{ todo.artist }}</div>

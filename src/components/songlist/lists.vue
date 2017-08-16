@@ -1,5 +1,6 @@
 <template>
   <div class="song-list">
+  
     <div class="search-bar"><i class="fa fa-search"></i> <input type="text" placeholder="搜索" spellcheck="false" class="search"></div>
     <div class="lists">
       <div class="title">

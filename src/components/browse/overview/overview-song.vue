@@ -18,7 +18,7 @@
           <span><i class="fa fa-download"></i>下载</span>
         </div>
       </div>
-      <div class="song" v-for="(i, index) in song" @dblclick="play(i.id)" :id="i.id" ref="song" @contextmenu="showMenu($event)" contextmenu="showMenu">
+      <div class="song" v-for="(i, index) in song" @click="play(i.id)" :id="i.id" ref="song" @contextmenu="showMenu($event)" contextmenu="showMenu">
         <div class="img">
           <span>{{ (index<9)? "0"+(index+1):(index+1) }}</span><img :src="i.img">
           <span class="opacity"></span>
@@ -73,7 +73,7 @@
         let self = this;
         self.$store.state.songId = id;
         self.$store.commit("getId", id);
-        self.menuDisplay = "none";
+        self.menuDisplay = "none";  
       },
       showMenu(e) {
         let self = this;
